@@ -1,49 +1,7 @@
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
-import { } from 'react';
 import canalBoatImg from '@/assets/canal-boat.jpg';
 import restaurantImg from '@/assets/restaurant.jpg';
 import { MapPin, Clock, Anchor, UtensilsCrossed } from 'lucide-react';
-
-function Countdown() {
-  const weddingDate = new Date('2026-08-24T14:00:00').getTime();
-  const [time, setTime] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
-
-  useEffect(() => {
-    const tick = () => {
-      const diff = weddingDate - Date.now();
-      if (diff <= 0) return;
-      setTime({
-        days: Math.floor(diff / 86400000),
-        hours: Math.floor((diff % 86400000) / 3600000),
-        minutes: Math.floor((diff % 3600000) / 60000),
-        seconds: Math.floor((diff % 60000) / 1000),
-      });
-    };
-    tick();
-    const id = setInterval(tick, 1000);
-    return () => clearInterval(id);
-  }, [weddingDate]);
-
-  const units = [
-    { label: 'Days', value: time.days },
-    { label: 'Hours', value: time.hours },
-    { label: 'Minutes', value: time.minutes },
-    { label: 'Seconds', value: time.seconds },
-  ];
-
-  return (
-    <div className="flex justify-center gap-4 sm:gap-8">
-      {units.map((u) => (
-        <div key={u.label} className="text-center">
-          <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-xl bg-ivory/80 backdrop-blur border border-gold/20 flex items-center justify-center shadow-sm animate-countdown-pulse">
-            <span className="font-serif text-2xl sm:text-3xl text-foreground">{u.value}</span>
-          </div>
-          <span className="text-xs tracking-widest text-muted-foreground mt-2 block uppercase">{u.label}</span>
-        </div>
-      ))}
-    </div>
-  );
-}
 
 export default function WeddingDetails() {
   const ref = useScrollAnimation();
@@ -56,9 +14,6 @@ export default function WeddingDetails() {
           <p className="text-sm tracking-[0.3em] uppercase text-gold mb-4">Save the Date</p>
           <h2 className="font-serif text-4xl md:text-5xl font-light mb-4">August 24, 2026</h2>
           <p className="text-muted-foreground italic font-serif text-lg">Amsterdam, The Netherlands</p>
-          <div className="mt-10">
-            <Countdown />
-          </div>
         </div>
 
         {/* Venues */}
