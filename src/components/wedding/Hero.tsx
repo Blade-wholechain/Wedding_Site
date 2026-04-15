@@ -1,4 +1,46 @@
+import { useEffect, useState } from 'react';
 import heroImage from '@/assets/hero-canal.jpg';
+
+function Countdown() {
+  const weddingDate = new Date('2026-08-24T14:00:00').getTime();
+  const [time, setTime] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+
+  useEffect(() => {
+    const tick = () => {
+      const diff = weddingDate - Date.now();
+      if (diff <= 0) return;
+      setTime({
+        days: Math.floor(diff / 86400000),
+        hours: Math.floor((diff % 86400000) / 3600000),
+        minutes: Math.floor((diff % 3600000) / 60000),
+        seconds: Math.floor((diff % 60000) / 1000),
+      });
+    };
+    tick();
+    const id = setInterval(tick, 1000);
+    return () => clearInterval(id);
+  }, [weddingDate]);
+
+  const units = [
+    { label: 'Days', value: time.days },
+    { label: 'Hours', value: time.hours },
+    { label: 'Minutes', value: time.minutes },
+    { label: 'Seconds', value: time.seconds },
+  ];
+
+  return (
+    <div className="flex justify-center gap-4 sm:gap-8 mt-8">
+      {units.map((u) => (
+        <div key={u.label} className="text-center">
+          <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-xl bg-ivory/80 backdrop-blur border border-gold/20 flex items-center justify-center shadow-sm animate-countdown-pulse">
+            <span className="font-serif text-2xl sm:text-3xl text-foreground">{u.value}</span>
+          </div>
+          <span className="text-xs tracking-widest text-muted-foreground mt-2 block uppercase">{u.label}</span>
+        </div>
+      ))}
+    </div>
+  );
+}
 
 export default function Hero() {
   return (
@@ -33,6 +75,7 @@ export default function Hero() {
         <p className="text-sm text-muted-foreground mt-2 tracking-wider">
           Amsterdam, The Netherlands
         </p>
+        <Countdown />
 
         <a
           href="#story"
