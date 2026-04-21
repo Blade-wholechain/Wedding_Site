@@ -10,16 +10,18 @@ const dayEvents = [
 ];
 
 const eveningEvents = [
-  { time: '19:30', title: 'Ontvangst avondgasten', desc: 'We verwelkomen onze avondgasten met een drankje', icon: Sparkles },
+  { time: '19:30', title: 'Inloop', desc: 'We verwelkomen onze avondgasten met een drankje', icon: Sparkles },
   { time: '20:00', title: 'Aanvang feest', desc: 'De dansvloer gaat open — dans de avond met ons door', icon: Music },
   { time: '00:30', title: 'Uitzwaaimoment', desc: 'Een feestelijk afscheid van het kersverse bruidspaar', icon: Heart },
 ];
+
+const fullEvents = [...dayEvents, ...eveningEvents];
 
 export default function Schedule() {
   const ref = useScrollAnimation();
   const { guestType } = useGuest();
 
-  const events = guestType === 'evening' ? eveningEvents : dayEvents;
+  const events = guestType === 'evening' ? eveningEvents : fullEvents;
   const subtitle = guestType === 'evening' ? 'Avondgasten' : 'Daggasten';
 
   return (
