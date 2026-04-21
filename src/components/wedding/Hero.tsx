@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import heroRoses from '@/assets/hero-roses.jpg';
+import heroBrasserie from '@/assets/hero-brasserie-bg.jpg';
 
 function Countdown() {
   const weddingDate = new Date('2026-09-05T14:00:00').getTime();
@@ -45,16 +45,18 @@ function Countdown() {
 export default function Hero() {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Background */}
+      {/* Background — Brasserie Paardenburg watercolor */}
       <div className="absolute inset-0">
         <img
-          src={heroRoses}
-          alt="Witte rozen, eucalyptus en champagneglazen"
+          src={heroBrasserie}
+          alt="Brasserie Paardenburg aan het water — aquarel"
           width={1920}
           height={1080}
-          className="w-full h-full object-cover"
+          className="w-full h-full object-cover object-center scale-105"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-background/40 via-background/20 to-background/85" />
+        {/* Soft ivory wash so text remains legible while the painting still reads */}
+        <div className="absolute inset-0 bg-gradient-to-b from-ivory/70 via-ivory/40 to-ivory/90" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_hsl(var(--ivory)/0.55)_0%,_transparent_60%)]" />
       </div>
 
       {/* Content */}
