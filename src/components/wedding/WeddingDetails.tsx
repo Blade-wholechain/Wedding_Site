@@ -1,5 +1,6 @@
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 import { MapPin, Clock, Heart, Sparkles } from 'lucide-react';
+import brasserie from '@/assets/brasserie-paardenburg.png';
 
 export default function WeddingDetails() {
   const ref = useScrollAnimation();
@@ -12,6 +13,23 @@ export default function WeddingDetails() {
           <p className="text-sm tracking-[0.3em] uppercase text-eucalyptus mb-4">Save the Date</p>
           <h2 className="font-serif text-4xl md:text-5xl font-light mb-4">5 september 2026</h2>
           <p className="text-muted-foreground italic font-serif text-lg">Een dag vol liefde, champagne en witte rozen</p>
+        </div>
+
+        {/* Venue illustration */}
+        <div className="scroll-animate mb-16">
+          <div className="relative max-w-3xl mx-auto">
+            <img
+              src={brasserie}
+              alt="Brasserie Paardenburg — illustratie van de locatie"
+              className="w-full h-auto mix-blend-multiply"
+              loading="lazy"
+            />
+            <div className="text-center mt-6">
+              <p className="text-xs tracking-[0.3em] uppercase text-eucalyptus mb-2">De locatie</p>
+              <h3 className="font-serif text-2xl md:text-3xl font-light">Brasserie Paardenburg</h3>
+              <div className="w-12 h-px bg-gold mx-auto mt-4" />
+            </div>
+          </div>
         </div>
 
         {/* Two cards */}
