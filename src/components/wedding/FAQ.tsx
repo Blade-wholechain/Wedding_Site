@@ -3,13 +3,13 @@ import { useState } from 'react';
 import { ChevronDown } from 'lucide-react';
 
 const faqs = [
-  { q: 'What should I wear?', a: 'Smart casual to semi-formal. Think elegant but comfortable — you\'ll be on a boat! Avoid very high heels and opt for stylish flats or wedges.' },
-  { q: 'What time should I arrive?', a: 'Please arrive at Prinsengracht Pier 7 by 1:45 PM. The boat departs promptly at 2:00 PM and we won\'t be able to wait.' },
-  { q: 'What if the weather is bad?', a: 'The boat has both an open deck and a beautiful glass-covered cabin. The ceremony will proceed rain or shine!' },
-  { q: 'Is there parking nearby?', a: 'We recommend using public transport or cycling. The nearest parking garage is Parkeergarage Centrum, a 5-minute walk from the pier.' },
-  { q: 'Can I bring my children?', a: 'While we adore your little ones, this will be an adults-only celebration. We hope you understand!' },
-  { q: 'Will there be vegetarian/vegan options?', a: 'Absolutely! Please mention your dietary requirements in the RSVP form and we\'ll make sure you\'re well taken care of.' },
-  { q: 'How do I get from the boat to the restaurant?', a: 'We\'ll dock a short walk from the restaurant and stroll together along the canal. It\'s about a 3-minute walk.' },
+  { q: 'Wat is de dresscode?', a: 'Chique en elegant. Denk aan champagne-, witte of zachte aardetinten. Vermijd felle kleuren — we passen graag bij het thema.' },
+  { q: 'Hoe laat moet ik er zijn?', a: 'Daggasten zijn welkom vanaf 13:30 uur. Avondgasten verwachten we vanaf 19:30 uur. Kom op tijd zodat je niets mist!' },
+  { q: 'Mag ik mijn kinderen meenemen?', a: 'We houden ervan om al jullie kleintjes te zien, maar dit wordt een bruiloft voor volwassenen. We hopen op jullie begrip.' },
+  { q: 'Zijn er vegetarische of veganistische opties?', a: 'Zeker! Vermeld je dieetwensen bij de RSVP en we zorgen dat alles geregeld is.' },
+  { q: 'Geven jullie een cadeaulijst?', a: 'Jullie aanwezigheid is het grootste geschenk. Een bijdrage aan onze huwelijksreis wordt erg gewaardeerd — meer info volgt op de dag zelf.' },
+  { q: 'Waar kan ik overnachten?', a: 'Bekijk de sectie Reizen & Verblijven hierboven voor onze hotelaanbevelingen in de buurt.' },
+  { q: 'Is er parkeergelegenheid?', a: 'Ja, er is voldoende parkeerruimte vlakbij de locatie. Carpoolen wordt aangemoedigd.' },
 ];
 
 export default function FAQ() {
@@ -20,22 +20,22 @@ export default function FAQ() {
     <section id="faq" className="py-24 md:py-32" ref={ref}>
       <div className="max-w-2xl mx-auto px-4">
         <div className="text-center mb-16 scroll-animate">
-          <p className="text-sm tracking-[0.3em] uppercase text-gold mb-4">Questions</p>
+          <p className="text-sm tracking-[0.3em] uppercase text-eucalyptus mb-4">Vragen</p>
           <h2 className="font-serif text-4xl md:text-5xl font-light">FAQ</h2>
           <div className="w-16 h-px bg-gold mx-auto mt-6" />
         </div>
 
         <div className="space-y-3">
           {faqs.map((faq, i) => (
-            <div key={i} className="scroll-animate rounded-xl border border-gold/10 overflow-hidden bg-ivory/40" style={{ transitionDelay: `${i * 60}ms` }}>
+            <div key={i} className="scroll-animate rounded-xl border border-sage-light/40 overflow-hidden bg-ivory/50" style={{ transitionDelay: `${i * 60}ms` }}>
               <button
                 onClick={() => setOpen(open === i ? null : i)}
-                className="w-full flex items-center justify-between px-6 py-4 text-left hover:bg-ivory/60 transition-colors"
+                className="w-full flex items-center justify-between px-6 py-4 text-left hover:bg-ivory/70 transition-colors"
               >
                 <span className="font-serif text-base">{faq.q}</span>
-                <ChevronDown size={16} className={`text-gold transition-transform duration-300 shrink-0 ml-4 ${open === i ? 'rotate-180' : ''}`} />
+                <ChevronDown size={16} className={`text-eucalyptus transition-transform duration-300 shrink-0 ml-4 ${open === i ? 'rotate-180' : ''}`} />
               </button>
-              <div className={`overflow-hidden transition-all duration-500 ${open === i ? 'max-h-40' : 'max-h-0'}`}>
+              <div className={`overflow-hidden transition-all duration-500 ${open === i ? 'max-h-48' : 'max-h-0'}`}>
                 <p className="px-6 pb-4 text-sm text-muted-foreground leading-relaxed">{faq.a}</p>
               </div>
             </div>
