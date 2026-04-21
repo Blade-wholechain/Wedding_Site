@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -6,42 +6,47 @@
 
 @layer base {
   :root {
-    --background: 36 33% 96%;
-    --foreground: 30 10% 20%;
+    /* Champagne, ivory, sage green palette */
+    --background: 40 35% 97%;
+    --foreground: 140 12% 18%;
 
-    --card: 36 30% 94%;
-    --card-foreground: 30 10% 20%;
+    --card: 40 30% 95%;
+    --card-foreground: 140 12% 18%;
 
-    --popover: 36 33% 96%;
-    --popover-foreground: 30 10% 20%;
+    --popover: 40 35% 97%;
+    --popover-foreground: 140 12% 18%;
 
-    --primary: 36 50% 50%;
-    --primary-foreground: 36 33% 96%;
+    --primary: 140 18% 32%;
+    --primary-foreground: 40 35% 97%;
 
-    --secondary: 36 20% 90%;
-    --secondary-foreground: 30 10% 25%;
+    --secondary: 40 25% 92%;
+    --secondary-foreground: 140 14% 22%;
 
-    --muted: 36 15% 92%;
-    --muted-foreground: 30 8% 45%;
+    --muted: 40 18% 93%;
+    --muted-foreground: 140 8% 40%;
 
-    --accent: 40 60% 70%;
-    --accent-foreground: 30 10% 15%;
+    --accent: 90 15% 70%;
+    --accent-foreground: 140 14% 18%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 70% 50%;
+    --destructive-foreground: 40 35% 97%;
 
-    --border: 36 20% 85%;
-    --input: 36 20% 88%;
-    --ring: 36 50% 50%;
+    --border: 90 12% 82%;
+    --input: 40 18% 90%;
+    --ring: 140 18% 45%;
 
     --radius: 0.75rem;
 
-    --gold: 40 70% 55%;
-    --gold-light: 40 60% 75%;
-    --champagne: 36 40% 92%;
-    --ivory: 40 30% 97%;
-    --warm-beige: 33 25% 88%;
-    --linen: 36 20% 95%;
+    /* Brand tokens */
+    --gold: 38 45% 62%;          /* champagne */
+    --gold-light: 38 50% 82%;    /* light champagne */
+    --champagne: 40 38% 93%;
+    --ivory: 42 40% 98%;
+    --warm-beige: 38 28% 90%;
+    --linen: 40 25% 95%;
+    --sage: 110 18% 55%;
+    --sage-light: 110 20% 80%;
+    --eucalyptus: 130 14% 48%;
 
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 240 5.3% 26.1%;
@@ -72,6 +77,12 @@
   .text-gold {
     color: hsl(var(--gold));
   }
+  .text-sage {
+    color: hsl(var(--sage));
+  }
+  .text-eucalyptus {
+    color: hsl(var(--eucalyptus));
+  }
 
   .bg-champagne {
     background-color: hsl(var(--champagne));
@@ -89,17 +100,24 @@
     background-color: hsl(var(--warm-beige));
   }
 
+  .bg-sage {
+    background-color: hsl(var(--sage));
+  }
+
   .border-gold {
     border-color: hsl(var(--gold-light));
   }
+  .border-sage {
+    border-color: hsl(var(--sage-light));
+  }
 
   .glass {
-    @apply bg-opacity-80 backdrop-blur-md;
+    @apply backdrop-blur-md;
     background-color: hsl(var(--ivory) / 0.7);
   }
 
   .linen-texture {
-    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23d4c5a9' fill-opacity='0.08'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23a8b5a0' fill-opacity='0.06'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
   }
 }
 
@@ -138,7 +156,7 @@
   transform: translateX(0);
 }
 
-/* Water float animation */
+/* Animations */
 @keyframes float {
   0%, 100% { transform: translateY(0px); }
   50% { transform: translateY(-10px); }
@@ -161,6 +179,11 @@
   50% { transform: scale(1.05); }
 }
 
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
 .animate-float {
   animation: float 4s ease-in-out infinite;
 }
@@ -179,12 +202,14 @@
   animation: countdown-pulse 2s ease-in-out infinite;
 }
 
-/* Smooth scrolling */
+.animate-fade-in {
+  animation: fade-in 0.8s ease-out forwards;
+}
+
 html {
   scroll-behavior: smooth;
 }
 
-/* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 6px;
 }
@@ -194,6 +219,6 @@ html {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: hsl(var(--gold-light));
+  background: hsl(var(--sage-light));
   border-radius: 3px;
 }
