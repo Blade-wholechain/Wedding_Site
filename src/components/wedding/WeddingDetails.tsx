@@ -43,7 +43,7 @@ export default function WeddingDetails() {
               <h3 className="font-serif text-2xl mb-4">Het Ja-woord</h3>
               <div className="space-y-2 text-sm text-muted-foreground">
                 <p className="flex items-center gap-2"><Clock size={14} /> 14:00 uur</p>
-                <p className="flex items-center gap-2"><MapPin size={14} /> Locatie wordt nog bekendgemaakt</p>
+                <p className="flex items-center gap-2"><MapPin size={14} /> Brasserie Paardenburg, Ouderkerk a/d Amstel</p>
               </div>
               <p className="text-sm text-muted-foreground mt-4 leading-relaxed">
                 Een intieme ceremonie omringd door witte rozen en eucalyptus. We kijken ernaar uit dit moment met jullie te delen.
@@ -60,7 +60,7 @@ export default function WeddingDetails() {
               <h3 className="font-serif text-2xl mb-4">Vier het met ons</h3>
               <div className="space-y-2 text-sm text-muted-foreground">
                 <p className="flex items-center gap-2"><Clock size={14} /> Vanaf de avond</p>
-                <p className="flex items-center gap-2"><MapPin size={14} /> Locatie wordt nog bekendgemaakt</p>
+                <p className="flex items-center gap-2"><MapPin size={14} /> Brasserie Paardenburg, Ouderkerk a/d Amstel</p>
               </div>
               <p className="text-sm text-muted-foreground mt-4 leading-relaxed">
                 Een avond vol champagne, dans en onvergetelijke momenten. Dresscode en details volgen binnenkort.
