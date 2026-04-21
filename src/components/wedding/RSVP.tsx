@@ -1,9 +1,11 @@
 import { useState } from 'react';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
+import { useGuest } from '@/context/GuestContext';
 import { Heart, Check } from 'lucide-react';
 
 export default function RSVP() {
   const ref = useScrollAnimation();
+  const { guestType } = useGuest();
   const [submitted, setSubmitted] = useState(false);
   const [form, setForm] = useState({
     name: '', attending: '', dietary: '', plusOne: false, plusOneName: '',
@@ -18,14 +20,14 @@ export default function RSVP() {
     return (
       <section id="rsvp" className="py-24 md:py-32 bg-champagne linen-texture" ref={ref}>
         <div className="max-w-md mx-auto px-4 text-center">
-          <div className="w-20 h-20 rounded-full bg-gold/10 border-2 border-gold/30 flex items-center justify-center mx-auto mb-6 animate-countdown-pulse">
-            <Heart size={28} className="text-gold" />
+          <div className="w-20 h-20 rounded-full bg-sage-light/20 border-2 border-sage-light/60 flex items-center justify-center mx-auto mb-6 animate-countdown-pulse">
+            <Heart size={28} className="text-eucalyptus" />
           </div>
-          <h2 className="font-serif text-3xl mb-3">Thank You!</h2>
+          <h2 className="font-serif text-3xl mb-3">Dankjewel!</h2>
           <p className="text-muted-foreground">
             {form.attending === 'yes'
-              ? "We can't wait to celebrate with you on the canals!"
-              : "We'll miss you! Thank you for letting us know."}
+              ? 'We kunnen niet wachten om met je te vieren!'
+              : 'We zullen je missen, bedankt voor het laten weten.'}
           </p>
         </div>
       </section>
@@ -36,39 +38,47 @@ export default function RSVP() {
     <section id="rsvp" className="py-24 md:py-32 bg-champagne linen-texture" ref={ref}>
       <div className="max-w-lg mx-auto px-4">
         <div className="text-center mb-12 scroll-animate">
-          <p className="text-sm tracking-[0.3em] uppercase text-gold mb-4">We'd love to hear from you</p>
+          <p className="text-sm tracking-[0.3em] uppercase text-eucalyptus mb-4">Laat het ons weten</p>
           <h2 className="font-serif text-4xl md:text-5xl font-light">RSVP</h2>
           <div className="w-16 h-px bg-gold mx-auto mt-6" />
-          <p className="text-muted-foreground mt-4 text-sm">Please respond by July 1, 2026</p>
+          <p className="text-muted-foreground mt-4 text-sm">Reageer graag vóór 1 juli 2026</p>
+          {guestType && (
+            <p className="text-xs text-eucalyptus mt-2 tracking-widest uppercase">
+              {guestType === 'day' ? 'Daggast' : 'Avondgast'}
+            </p>
+          )}
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-6 scroll-animate">
           <div>
-            <label className="text-sm text-muted-foreground mb-2 block">Full Name</label>
+            <label className="text-sm text-muted-foreground mb-2 block">Volledige naam</label>
             <input
               required
               value={form.name}
               onChange={(e) => setForm({ ...form, name: e.target.value })}
-              className="w-full px-4 py-3 rounded-xl bg-ivory/80 border border-gold/20 text-sm focus:outline-none focus:border-gold/50 transition-colors"
-              placeholder="Your full name"
+              className="w-full px-4 py-3 rounded-xl bg-ivory/80 border border-sage-light/40 text-sm focus:outline-none focus:border-eucalyptus/60 transition-colors"
+              placeholder="Je volledige naam"
             />
           </div>
 
           <div>
-            <label className="text-sm text-muted-foreground mb-3 block">Will you attend?</label>
+            <label className="text-sm text-muted-foreground mb-3 block">Ben je erbij?</label>
             <div className="flex gap-3">
-              {['yes', 'no'].map((v) => (
+              {[
+                { v: 'yes', label: 'Ja, met liefde' },
+                { v: 'no', label: 'Helaas niet' },
+              ].map((opt) => (
                 <button
-                  key={v}
+                  key={opt.v}
                   type="button"
-                  onClick={() => setForm({ ...form, attending: v })}
+                  onClick={() => setForm({ ...form, attending: opt.v })}
                   className={`flex-1 py-3 rounded-xl border text-sm transition-all duration-300 ${
-                    form.attending === v
-                      ? 'bg-gold/10 border-gold text-foreground'
-                      : 'bg-ivory/50 border-gold/15 text-muted-foreground hover:border-gold/30'
+                    form.attending === opt.v
+                      ? 'bg-sage-light/25 border-eucalyptus text-foreground'
+                      : 'bg-ivory/50 border-sage-light/30 text-muted-foreground hover:border-sage-light/60'
                   }`}
                 >
-                  {v === 'yes' ? 'Joyfully Accept' : 'Regretfully Decline'}
+                  {opt.label}
                 </button>
               ))}
             </div>
@@ -77,12 +87,12 @@ export default function RSVP() {
           {form.attending === 'yes' && (
             <>
               <div>
-                <label className="text-sm text-muted-foreground mb-2 block">Dietary Requirements</label>
+                <label className="text-sm text-muted-foreground mb-2 block">Dieetwensen</label>
                 <input
                   value={form.dietary}
                   onChange={(e) => setForm({ ...form, dietary: e.target.value })}
-                  className="w-full px-4 py-3 rounded-xl bg-ivory/80 border border-gold/20 text-sm focus:outline-none focus:border-gold/50 transition-colors"
-                  placeholder="Any allergies or preferences"
+                  className="w-full px-4 py-3 rounded-xl bg-ivory/80 border border-sage-light/40 text-sm focus:outline-none focus:border-eucalyptus/60 transition-colors"
+                  placeholder="Allergieën of voorkeuren"
                 />
               </div>
 
@@ -91,19 +101,19 @@ export default function RSVP() {
                   <div
                     onClick={() => setForm({ ...form, plusOne: !form.plusOne })}
                     className={`w-5 h-5 rounded border-2 flex items-center justify-center transition-all ${
-                      form.plusOne ? 'bg-gold border-gold' : 'border-gold/30'
+                      form.plusOne ? 'bg-eucalyptus border-eucalyptus' : 'border-sage-light/60'
                     }`}
                   >
                     {form.plusOne && <Check size={12} className="text-primary-foreground" />}
                   </div>
-                  <span className="text-sm text-muted-foreground">I'm bringing a plus one</span>
+                  <span className="text-sm text-muted-foreground">Ik neem een introducé mee</span>
                 </label>
                 {form.plusOne && (
                   <input
                     value={form.plusOneName}
                     onChange={(e) => setForm({ ...form, plusOneName: e.target.value })}
-                    className="w-full mt-3 px-4 py-3 rounded-xl bg-ivory/80 border border-gold/20 text-sm focus:outline-none focus:border-gold/50 transition-colors"
-                    placeholder="Guest's full name"
+                    className="w-full mt-3 px-4 py-3 rounded-xl bg-ivory/80 border border-sage-light/40 text-sm focus:outline-none focus:border-eucalyptus/60 transition-colors"
+                    placeholder="Naam van je introducé"
                   />
                 )}
               </div>
@@ -113,9 +123,9 @@ export default function RSVP() {
           <button
             type="submit"
             disabled={!form.name || !form.attending}
-            className="w-full py-3.5 rounded-xl bg-gold/90 text-primary-foreground font-medium text-sm tracking-wider hover:bg-gold transition-all duration-300 disabled:opacity-40 disabled:cursor-not-allowed"
+            className="w-full py-3.5 rounded-xl bg-eucalyptus text-primary-foreground font-medium text-sm tracking-wider hover:opacity-90 transition-all duration-300 disabled:opacity-40 disabled:cursor-not-allowed"
           >
-            Send RSVP
+            Verstuur RSVP
           </button>
         </form>
       </div>

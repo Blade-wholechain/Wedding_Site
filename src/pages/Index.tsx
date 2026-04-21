@@ -1,6 +1,7 @@
+import { useGuest } from '@/context/GuestContext';
+import AccessGate from '@/components/wedding/AccessGate';
 import Navigation from '@/components/wedding/Navigation';
 import Hero from '@/components/wedding/Hero';
-import OurStory from '@/components/wedding/OurStory';
 import WeddingDetails from '@/components/wedding/WeddingDetails';
 import Schedule from '@/components/wedding/Schedule';
 import SeatingPlan from '@/components/wedding/SeatingPlan';
@@ -11,11 +12,16 @@ import FAQ from '@/components/wedding/FAQ';
 import Footer from '@/components/wedding/Footer';
 
 export default function Index() {
+  const { guestType } = useGuest();
+
+  if (!guestType) {
+    return <AccessGate />;
+  }
+
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background animate-fade-in">
       <Navigation />
       <Hero />
-      <OurStory />
       <WeddingDetails />
       <Schedule />
       <SeatingPlan />
