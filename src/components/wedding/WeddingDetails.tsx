@@ -1,6 +1,6 @@
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 import { MapPin, Clock, Heart, Sparkles } from 'lucide-react';
-import brasserie from '@/assets/brasserie-paardenburg.png';
+import roses from '@/assets/hero-roses.jpg';
 
 export default function WeddingDetails() {
   const ref = useScrollAnimation();
@@ -15,19 +15,23 @@ export default function WeddingDetails() {
           <p className="text-muted-foreground italic font-serif text-lg">Een dag vol liefde, champagne en witte rozen</p>
         </div>
 
-        {/* Venue illustration */}
+        {/* Roses & champagne feature */}
         <div className="scroll-animate mb-16">
           <div className="relative max-w-3xl mx-auto">
-            <img
-              src={brasserie}
-              alt="Brasserie Paardenburg — illustratie van de locatie"
-              className="w-full h-auto mix-blend-multiply"
-              loading="lazy"
-            />
-            <div className="text-center mt-6">
-              <p className="text-xs tracking-[0.3em] uppercase text-eucalyptus mb-2">De locatie</p>
-              <h3 className="font-serif text-2xl md:text-3xl font-light">Brasserie Paardenburg</h3>
-              <div className="w-12 h-px bg-gold mx-auto mt-4" />
+            <div className="relative rounded-3xl overflow-hidden shadow-xl border border-sage-light/40">
+              <img
+                src={roses}
+                alt="Witte rozen, eucalyptus en champagneglazen"
+                className="w-full h-[420px] md:h-[520px] object-cover"
+                loading="lazy"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-ivory/80 via-transparent to-transparent" />
+              <div className="absolute bottom-0 left-0 right-0 text-center pb-8 px-6">
+                <p className="text-xs tracking-[0.3em] uppercase text-eucalyptus mb-2">De locatie</p>
+                <h3 className="font-serif text-2xl md:text-3xl font-light text-foreground">Brasserie Paardenburg</h3>
+                <p className="text-sm text-muted-foreground italic mt-1">Ouderkerk aan de Amstel</p>
+                <div className="w-12 h-px bg-gold mx-auto mt-4" />
+              </div>
             </div>
           </div>
         </div>
