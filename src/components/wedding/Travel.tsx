@@ -20,8 +20,8 @@ export default function Travel() {
     <section id="travel" className="py-24 md:py-32" ref={ref}>
       <div className="max-w-5xl mx-auto px-4">
         <div className="text-center mb-16 scroll-animate">
-          <p className="text-sm tracking-[0.3em] uppercase text-eucalyptus mb-4">Plan je reis</p>
-          <h2 className="font-serif text-4xl md:text-5xl font-light">Reizen & Verblijven</h2>
+          <p className="text-sm tracking-[0.3em] uppercase text-eucalyptus mb-4">{"\n"}</p>
+          <h2 className="font-serif text-4xl md:text-5xl font-light">Overnachten</h2>
           <div className="w-16 h-px bg-gold mx-auto mt-6" />
         </div>
 

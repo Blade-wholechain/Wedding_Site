@@ -38,10 +38,10 @@ export default function RSVP() {
     <section id="rsvp" className="py-24 md:py-32 bg-champagne linen-texture" ref={ref}>
       <div className="max-w-lg mx-auto px-4">
         <div className="text-center mb-12 scroll-animate">
-          <p className="text-sm tracking-[0.3em] uppercase text-eucalyptus mb-4">Laat het ons weten</p>
+          <p className="text-sm tracking-[0.3em] uppercase text-eucalyptus mb-4">{"\u200B"}Laat ons weten of je erbij bent</p>
           <h2 className="font-serif text-4xl md:text-5xl font-light">RSVP</h2>
           <div className="w-16 h-px bg-gold mx-auto mt-6" />
-          <p className="text-muted-foreground mt-4 text-sm">Reageer graag vóór 1 juli 2026</p>
+          <p className="text-muted-foreground mt-4 text-sm">{"\u200B"}Graag reageren vóór 1 juli 2026</p>
           {guestType && (
             <p className="text-xs text-eucalyptus mt-2 tracking-widest uppercase">
               {guestType === 'day' ? 'Daggast' : 'Avondgast'}
@@ -62,7 +62,7 @@ export default function RSVP() {
           </div>
 
           <div>
-            <label className="text-sm text-muted-foreground mb-3 block">Ben je erbij?</label>
+            <label className="text-sm text-muted-foreground mb-3 block">{"\n"}</label>
             <div className="flex gap-3">
               {[
                 { v: 'yes', label: 'Ja, met liefde' },

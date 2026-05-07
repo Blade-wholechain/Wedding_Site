@@ -62,7 +62,7 @@ export default function Hero() {
       {/* Content */}
       <div className="relative z-10 text-center px-4">
         <p className="text-sm tracking-[0.4em] uppercase text-eucalyptus mb-6 animate-gentle-wave">
-          Samen met onze families
+          Gaan Eindelijk Trouwen
         </p>
         <h1 className="font-serif text-6xl sm:text-8xl md:text-9xl font-light tracking-wide mb-4">
           Dulcia <span className="text-gold italic font-normal">&</span> Wybo

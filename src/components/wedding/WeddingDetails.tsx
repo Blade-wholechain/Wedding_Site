@@ -11,7 +11,7 @@ export default function WeddingDetails() {
         {/* Header */}
         <div className="text-center mb-16 scroll-animate">
           <p className="text-sm tracking-[0.3em] uppercase text-eucalyptus mb-4">Save the Date</p>
-          <h2 className="font-serif text-4xl md:text-5xl font-light mb-4">5 september 2026</h2>
+          <h2 className="font-serif text-4xl md:text-5xl font-light mb-4">{"\n"}</h2>
           <p className="text-muted-foreground italic font-serif text-lg">Een dag vol liefde, champagne en witte rozen</p>
         </div>
 

@@ -28,7 +28,7 @@ export default function Gallery() {
     <section id="gallery" className="py-24 md:py-32 bg-linen linen-texture" ref={ref}>
       <div className="max-w-5xl mx-auto px-4">
         <div className="text-center mb-16 scroll-animate">
-          <p className="text-sm tracking-[0.3em] uppercase text-eucalyptus mb-4">Momenten</p>
+          <p className="text-sm tracking-[0.3em] uppercase text-eucalyptus mb-4">TBD</p>
           <h2 className="font-serif text-4xl md:text-5xl font-light">Galerij</h2>
           <div className="w-16 h-px bg-gold mx-auto mt-6" />
         </div>
@@ -51,7 +51,7 @@ export default function Gallery() {
         </div>
 
         <p className="text-center text-xs text-muted-foreground mt-6 italic">
-          Foto's worden binnenkort toegevoegd ✨
+          {"\n"}
         </p>
       </div>
 

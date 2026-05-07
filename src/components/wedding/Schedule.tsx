@@ -3,8 +3,8 @@ import { useGuest } from '@/context/GuestContext';
 import { Heart, Wine, UtensilsCrossed, Music, Sparkles, Sun } from 'lucide-react';
 
 const dayEvents = [
-  { time: '13:30', title: 'Ontvangst', desc: 'We verwelkomen onze daggasten met een glaasje', icon: Sun },
-  { time: '14:00', title: 'Aanvang ceremonie', desc: 'Het ja-woord, omringd door familie en vrienden', icon: Heart },
+  { time: '13:30', title: 'Ontvangst', desc: 'TBD', icon: Sun },
+  { time: '14:00', title: 'Inloop (19:30)', desc: 'Het ja-woord, omringd door familie en vrienden', icon: Heart },
   { time: '15:00', title: 'Champagne toost', desc: 'Proosten op het bruidspaar met witte rozen om ons heen', icon: Wine },
   { time: '16:30', title: 'Diner', desc: 'Een verzorgd diner in elegante sfeer', icon: UtensilsCrossed },
 ];
@@ -28,7 +28,7 @@ export default function Schedule() {
     <section id="schedule" className="py-24 md:py-32 bg-champagne linen-texture" ref={ref}>
       <div className="max-w-3xl mx-auto px-4">
         <div className="text-center mb-16 scroll-animate">
-          <p className="text-sm tracking-[0.3em] uppercase text-eucalyptus mb-4">De Dag</p>
+          <p className="text-sm tracking-[0.3em] uppercase text-eucalyptus mb-4">{"\n"}</p>
           <h2 className="font-serif text-4xl md:text-5xl font-light">Programma</h2>
           <div className="w-16 h-px bg-gold mx-auto mt-6" />
           <p className="text-sm text-muted-foreground mt-4 font-serif italic">

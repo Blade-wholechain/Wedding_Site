@@ -8,12 +8,12 @@ export default function Footer() {
           Dulcia <span className="text-gold italic">&</span> Wybo
         </p>
         <p className="text-sm text-muted-foreground mb-6 italic font-serif">
-          "En zo begint ons avontuur..."
+          "To be continued..."
         </p>
         <div className="flex items-center justify-center gap-2 text-muted-foreground text-xs">
           <span>Gemaakt met</span>
           <Heart size={12} className="text-gold" />
-          <span>voor onze gasten</span>
+          <span>by Bladeson</span>
         </div>
         <p className="text-xs text-muted-foreground/60 mt-4">
           5 september 2026
