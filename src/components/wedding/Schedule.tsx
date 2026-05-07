@@ -3,16 +3,16 @@ import { useGuest } from '@/context/GuestContext';
 import { Heart, Wine, UtensilsCrossed, Music, Sparkles, Sun } from 'lucide-react';
 
 const dayEvents = [
-  { time: '13:30', title: 'Ontvangst', desc: 'TBD', icon: Sun },
-  { time: '14:00', title: 'Inloop (19:30)', desc: 'Het ja-woord, omringd door familie en vrienden', icon: Heart },
-  { time: '15:00', title: 'Champagne toost', desc: 'Proosten op het bruidspaar met witte rozen om ons heen', icon: Wine },
-  { time: '16:30', title: 'Diner', desc: 'Een verzorgd diner in elegante sfeer', icon: UtensilsCrossed },
+  { time: '13:30', title: 'Ontvangst', desc: '\u200BWij verwelkomen onze daggasten uiterlijk op dit tijdstip', icon: Sun },
+  { time: '14:00', title: 'Ceremonie', desc: 'Het echtpaar geeft elkaar het ja-woord', icon: Heart },
+  { time: '15:00', title: 'Champagne toost', desc: 'Op het bruidspaar en de liefde', icon: Wine },
+  { time: '16:30', title: 'Diner', desc: '', icon: UtensilsCrossed },
 ];
 
 const eveningEvents = [
-  { time: '19:30', title: 'Inloop', desc: 'We verwelkomen onze avondgasten met een drankje', icon: Sparkles },
-  { time: '20:00', title: 'Aanvang feest', desc: 'De dansvloer gaat open — dans de avond met ons door', icon: Music },
-  { time: '00:30', title: 'Uitzwaaimoment', desc: 'Een feestelijk afscheid van het kersverse bruidspaar', icon: Heart },
+  { time: '19:30', title: 'Inloop', desc: 'TBD', icon: Sparkles },
+  { time: '20:00', title: 'Aanvang feest', desc: 'Het feest kan beginnen!', icon: Music },
+  { time: '00:30', title: 'Uitzwaaimoment', desc: 'TBD', icon: Heart },
 ];
 
 const fullEvents = [...dayEvents, ...eveningEvents];
