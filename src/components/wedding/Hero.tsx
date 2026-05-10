@@ -77,7 +77,7 @@ export default function Hero() {
         <Countdown />
 
         <a
-          href="#details"
+          href="#schedule"
           className="inline-block mt-12 px-8 py-3 border border-sage-light/60 rounded-full text-sm tracking-wider text-foreground hover:bg-sage-light/20 transition-all duration-500 animate-float"
         >
           Bekijk de details
