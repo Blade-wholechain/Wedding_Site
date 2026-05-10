@@ -6,10 +6,9 @@ import cors from 'cors';
 import express from 'express';
 import nodemailer from 'nodemailer';
 
-// Render: Gmail SMTP over IPv6 often fails (ENETUNREACH). setDefaultResultOrder alone does not
-// affect nodemailer's resolver — we must pass a custom lookup (IPv4-only).
 dns.setDefaultResultOrder('ipv4first');
 
+/** Used only if we fall back to hostname connect (resolve4 failed). */
 function lookupIpv4(hostname, _options, callback) {
   dns.lookup(hostname, { family: 4 }, callback);
 }
@@ -37,21 +36,48 @@ function buildRsvpEmailBody(payload) {
 }
 
 let transporter;
-function getTransporter() {
+
+async function createMailTransport() {
   if (!APP_PASSWORD) return null;
-  if (!transporter) {
-    transporter = nodemailer.createTransport({
-      host: 'smtp.gmail.com',
-      port: 587,
-      secure: false,
-      requireTLS: true,
-      auth: { user: GMAIL_USER, pass: APP_PASSWORD },
-      lookup: lookupIpv4,
-      connectionTimeout: 25_000,
-      greetingTimeout: 20_000,
-      socketTimeout: 45_000,
-    });
+
+  try {
+    const addrs = await dns.promises.resolve4('smtp.gmail.com');
+    if (addrs?.length) {
+      const ip = addrs[0];
+      console.log('[smtp] using Gmail A record (IPv4):', ip);
+      return nodemailer.createTransport({
+        host: ip,
+        port: 587,
+        secure: false,
+        requireTLS: true,
+        auth: { user: GMAIL_USER, pass: APP_PASSWORD },
+        tls: {
+          servername: 'smtp.gmail.com',
+        },
+        connectionTimeout: 25_000,
+        greetingTimeout: 20_000,
+        socketTimeout: 45_000,
+      });
+    }
+  } catch (e) {
+    console.warn('[smtp] resolve4(smtp.gmail.com) failed:', e.message);
   }
+
+  console.warn('[smtp] fallback: hostname smtp.gmail.com + IPv4-only DNS lookup');
+  return nodemailer.createTransport({
+    host: 'smtp.gmail.com',
+    port: 587,
+    secure: false,
+    requireTLS: true,
+    auth: { user: GMAIL_USER, pass: APP_PASSWORD },
+    lookup: lookupIpv4,
+    connectionTimeout: 25_000,
+    greetingTimeout: 20_000,
+    socketTimeout: 45_000,
+  });
+}
+
+function getTransporter() {
   return transporter;
 }
 
@@ -120,11 +146,19 @@ app.post('/api/rsvp', async (req, res) => {
   }
 });
 
-// Must bind 0.0.0.0 on Render/Docker or the load balancer never reaches the app.
-app.listen(PORT, '0.0.0.0', () => {
-  console.log(`RSVP API listening on 0.0.0.0:${PORT}`);
-  console.log(RSVP_SECRET ? 'RSVP_SECRET is set — POST /api/rsvp requires X-RSVP-Secret' : 'RSVP_SECRET not set — no secret header required');
-  if (!APP_PASSWORD) {
-    console.warn('GMAIL_APP_PASSWORD is not set — POST /api/rsvp will return 503 until you add it to .env');
-  }
+async function main() {
+  transporter = await createMailTransport();
+
+  app.listen(PORT, '0.0.0.0', () => {
+    console.log(`RSVP API listening on 0.0.0.0:${PORT}`);
+    console.log(RSVP_SECRET ? 'RSVP_SECRET is set — POST /api/rsvp requires X-RSVP-Secret' : 'RSVP_SECRET not set — no secret header required');
+    if (!APP_PASSWORD) {
+      console.warn('GMAIL_APP_PASSWORD is not set — POST /api/rsvp will return 503 until you add it to .env');
+    }
+  });
+}
+
+main().catch((err) => {
+  console.error('Fatal:', err);
+  process.exit(1);
 });
