@@ -31,7 +31,7 @@ export default function FAQ() {
         </div>
 
         <div className="space-y-3">
-          {faqs.map((faq, i) => (
+          {visibleFaqs.map((faq, i) => (
             <div key={i} className="scroll-animate rounded-xl border border-sage-light/40 overflow-hidden bg-ivory/50" style={{ transitionDelay: `${i * 60}ms` }}>
               <button
                 onClick={() => setOpen(open === i ? null : i)}
