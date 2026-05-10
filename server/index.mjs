@@ -50,6 +50,16 @@ const app = express();
 app.use(cors({ origin: true }));
 app.use(express.json({ limit: '32kb' }));
 
+app.get('/', (_req, res) => {
+  res.type('html').send(
+    '<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"/><title>RSVP API</title></head>' +
+      '<body style="font-family:system-ui,sans-serif;max-width:36rem;margin:3rem auto;padding:0 1rem">' +
+      '<p>This URL is the <strong>RSVP backend</strong> for the wedding site. There is no webpage here.</p>' +
+      '<p>Open <a href="/api/health">/api/health</a> to verify the service.</p>' +
+      '</body></html>'
+  );
+});
+
 app.get('/api/health', (_req, res) => {
   res.json({ ok: true, gmailConfigured: Boolean(APP_PASSWORD) });
 });
