@@ -4,7 +4,7 @@ import path from "path";
 import { componentTagger } from "lovable-tagger";
 
 // https://vitejs.dev/config/
-// Set VITE_BASE_PATH=/your-repo-name/ when building for GitHub project pages (see .github/workflows/pages.yml).
+// CI sets VITE_BASE_PATH (see .github/workflows/pages.yml). Custom domains need base `/`.
 export default defineConfig(({ mode }) => ({
   base: process.env.VITE_BASE_PATH ?? "/",
   server: {
