@@ -14,8 +14,8 @@ export default {
     },
     extend: {
       fontFamily: {
-        serif: ['"Cormorant Garamond"', 'Georgia', 'serif'],
-        sans: ['Inter', 'system-ui', 'sans-serif'],
+        serif: ['"Adios Script Pro"', 'cursive'],
+        sans: ['"Cinzel Decorative"', 'serif'],
       },
       colors: {
         border: "hsl(var(--border))",
