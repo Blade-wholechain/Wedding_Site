@@ -14,7 +14,7 @@ export default function Travel() {
         </div>
 
         <a
-          href="https://maps.app.goo.gl/6Zk2umZRgMNBmDcA6"
+          href="https://www.google.com/maps/search/?api=1&query=Radisson+Hotel+Suites+Amsterdam+Zuid"
           target="_blank"
           rel="noopener noreferrer"
           className="scroll-animate group block rounded-3xl bg-ivory/70 backdrop-blur border border-sage-light/40 p-10 md:p-12 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-500"
