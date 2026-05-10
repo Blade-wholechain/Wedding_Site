@@ -1,6 +1,13 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, type DependencyList } from 'react';
 
-export function useScrollAnimation() {
+/** Stable empty deps so mount-only observers don’t get a new `[]` every render. */
+const DEFAULT_DEPS: DependencyList = [];
+
+/**
+ * Observes `.scroll-animate*` inside `ref` and adds `.visible` when in view.
+ * Pass `deps` (e.g. `[submitted]`) when inner DOM is swapped so new nodes get observed.
+ */
+export function useScrollAnimation(deps: DependencyList = DEFAULT_DEPS) {
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -18,11 +25,11 @@ export function useScrollAnimation() {
     const el = ref.current;
     if (el) {
       const animatables = el.querySelectorAll('.scroll-animate, .scroll-animate-left, .scroll-animate-right');
-      animatables.forEach((el) => observer.observe(el));
+      animatables.forEach((node) => observer.observe(node));
     }
 
     return () => observer.disconnect();
-  }, []);
+  }, deps);
 
   return ref;
 }

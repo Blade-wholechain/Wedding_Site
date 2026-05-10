@@ -35,6 +35,9 @@ jobs:
       - name: Install and build
         env:
           VITE_BASE_PATH: ${{ vars.PAGESASSETBASE || format('/{0}/', github.event.repository.name) }}
+          VITE_RSVP_API_URL: ${{ vars.VITE_RSVP_API_URL }}
+          VITE_RSVP_SECRET: ${{ secrets.VITE_RSVP_SECRET }}
+          PhotoUpload: ${{ vars.PhotoUpload }}
         run: |
           npm ci
           npm run build
