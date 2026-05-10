@@ -1,14 +1,19 @@
 import { useState } from 'react';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 import { useGuest } from '@/context/GuestContext';
-import { Heart, Check } from 'lucide-react';
+import { Heart } from 'lucide-react';
+
+const dietaryOptions = ['Vlees', 'Vis', 'Ik ben zwanger', 'Anders'];
 
 export default function RSVP() {
   const ref = useScrollAnimation();
   const { guestType } = useGuest();
   const [submitted, setSubmitted] = useState(false);
   const [form, setForm] = useState({
-    name: '', attending: '', dietary: '', plusOne: false, plusOneName: '',
+    name: '',
+    attending: '',
+    dietary: '' as string,
+    dietaryOther: '',
   });
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -38,10 +43,10 @@ export default function RSVP() {
     <section id="rsvp" className="py-24 md:py-32 bg-champagne linen-texture" ref={ref}>
       <div className="max-w-lg mx-auto px-4">
         <div className="text-center mb-12 scroll-animate">
-          <p className="text-sm tracking-[0.3em] uppercase text-eucalyptus mb-4">{"\u200B"}Laat ons weten of je erbij bent</p>
+          <p className="text-sm tracking-[0.3em] uppercase text-eucalyptus mb-4">Laat ons weten of je erbij bent</p>
           <h2 className="font-serif text-4xl md:text-5xl font-light">RSVP</h2>
           <div className="w-16 h-px bg-gold mx-auto mt-6" />
-          <p className="text-muted-foreground mt-4 text-sm">{"\u200B"}Graag reageren vóór 1 juli 2026</p>
+          <p className="text-muted-foreground mt-4 text-sm">Graag reageren vóór 1 juli 2026</p>
           {guestType && (
             <p className="text-xs text-eucalyptus mt-2 tracking-widest uppercase">
               {guestType === 'day' ? 'Daggast' : 'Avondgast'}
@@ -62,7 +67,6 @@ export default function RSVP() {
           </div>
 
           <div>
-            <label className="text-sm text-muted-foreground mb-3 block">{"\n"}</label>
             <div className="flex gap-3">
               {[
                 { v: 'yes', label: 'Ja, met liefde' },
@@ -84,40 +88,34 @@ export default function RSVP() {
             </div>
           </div>
 
-          {form.attending === 'yes' && (
-            <>
-              <div>
-                <label className="text-sm text-muted-foreground mb-2 block">Dieetwensen</label>
-                <input
-                  value={form.dietary}
-                  onChange={(e) => setForm({ ...form, dietary: e.target.value })}
-                  className="w-full px-4 py-3 rounded-xl bg-ivory/80 border border-sage-light/40 text-sm focus:outline-none focus:border-eucalyptus/60 transition-colors"
-                  placeholder="Allergieën of voorkeuren"
-                />
-              </div>
-
-              <div>
-                <label className="flex items-center gap-3 cursor-pointer">
-                  <div
-                    onClick={() => setForm({ ...form, plusOne: !form.plusOne })}
-                    className={`w-5 h-5 rounded border-2 flex items-center justify-center transition-all ${
-                      form.plusOne ? 'bg-eucalyptus border-eucalyptus' : 'border-sage-light/60'
+          {form.attending === 'yes' && guestType === 'day' && (
+            <div>
+              <label className="text-sm text-muted-foreground mb-3 block">Dieetvoorkeur</label>
+              <div className="grid grid-cols-2 gap-3">
+                {dietaryOptions.map((opt) => (
+                  <button
+                    key={opt}
+                    type="button"
+                    onClick={() => setForm({ ...form, dietary: opt })}
+                    className={`py-3 rounded-xl border text-sm transition-all duration-300 ${
+                      form.dietary === opt
+                        ? 'bg-sage-light/25 border-eucalyptus text-foreground'
+                        : 'bg-ivory/50 border-sage-light/30 text-muted-foreground hover:border-sage-light/60'
                     }`}
                   >
-                    {form.plusOne && <Check size={12} className="text-primary-foreground" />}
-                  </div>
-                  <span className="text-sm text-muted-foreground">Ik neem een introducé mee</span>
-                </label>
-                {form.plusOne && (
-                  <input
-                    value={form.plusOneName}
-                    onChange={(e) => setForm({ ...form, plusOneName: e.target.value })}
-                    className="w-full mt-3 px-4 py-3 rounded-xl bg-ivory/80 border border-sage-light/40 text-sm focus:outline-none focus:border-eucalyptus/60 transition-colors"
-                    placeholder="Naam van je introducé"
-                  />
-                )}
+                    {opt}
+                  </button>
+                ))}
               </div>
-            </>
+              {form.dietary === 'Anders' && (
+                <input
+                  value={form.dietaryOther}
+                  onChange={(e) => setForm({ ...form, dietaryOther: e.target.value })}
+                  className="w-full mt-3 px-4 py-3 rounded-xl bg-ivory/80 border border-sage-light/40 text-sm focus:outline-none focus:border-eucalyptus/60 transition-colors"
+                  placeholder="Vertel ons over je dieetwensen"
+                />
+              )}
+            </div>
           )}
 
           <button
