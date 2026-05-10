@@ -23,6 +23,18 @@ const captions = [
 export default function Gallery() {
   const ref = useScrollAnimation();
   const [lightbox, setLightbox] = useState<number | null>(null);
+  const [uploads, setUploads] = useState<string[]>([]);
+  const inputRef = useRef<HTMLInputElement | null>(null);
+
+  const handleFiles = (files: FileList | null) => {
+    if (!files) return;
+    const next: string[] = [];
+    Array.from(files).slice(0, 12).forEach((file) => {
+      if (!file.type.startsWith('image/')) return;
+      next.push(URL.createObjectURL(file));
+    });
+    setUploads((prev) => [...next, ...prev]);
+  };
 
   return (
     <section id="gallery" className="py-24 md:py-32 bg-linen linen-texture" ref={ref}>
@@ -53,6 +65,48 @@ export default function Gallery() {
         <p className="text-center text-xs text-muted-foreground mt-6 italic">
           {"\n"}
         </p>
+        {/* Guest uploads */}
+        <div className="mt-20 scroll-animate">
+          <div className="text-center mb-8">
+            <p className="text-sm tracking-[0.3em] uppercase text-eucalyptus mb-4">Jullie momenten</p>
+            <h3 className="font-serif text-2xl md:text-3xl font-light">Deel je foto's</h3>
+            <div className="w-12 h-px bg-gold mx-auto mt-4" />
+            <p className="text-sm text-muted-foreground mt-4 font-serif italic">
+              Heb je foto's gemaakt? Deel ze dan a.u.b. met ons
+            </p>
+          </div>
+
+          <div
+            onClick={() => inputRef.current?.click()}
+            onDragOver={(e) => e.preventDefault()}
+            onDrop={(e) => { e.preventDefault(); handleFiles(e.dataTransfer.files); }}
+            className="cursor-pointer rounded-3xl border-2 border-dashed border-sage-light/60 bg-ivory/50 hover:bg-ivory/80 transition-colors p-10 text-center"
+          >
+            <div className="w-14 h-14 rounded-full bg-sage-light/20 border border-sage-light/50 flex items-center justify-center mx-auto mb-4">
+              <Upload size={20} className="text-eucalyptus" />
+            </div>
+            <p className="font-serif text-lg">Klik of sleep foto's hierheen</p>
+            <p className="text-xs text-muted-foreground mt-2 tracking-wider">JPG of PNG</p>
+            <input
+              ref={inputRef}
+              type="file"
+              accept="image/*"
+              multiple
+              className="hidden"
+              onChange={(e) => handleFiles(e.target.files)}
+            />
+          </div>
+
+          {uploads.length > 0 && (
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8">
+              {uploads.map((src, i) => (
+                <div key={i} className="aspect-square rounded-2xl overflow-hidden bg-ivory border border-sage-light/40">
+                  <img src={src} alt={`Gast foto ${i + 1}`} className="w-full h-full object-cover" />
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
       </div>
 
       {/* Lightbox */}
