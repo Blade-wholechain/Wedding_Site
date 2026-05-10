@@ -31,9 +31,11 @@ export default function Schedule() {
           <p className="text-sm tracking-[0.3em] uppercase text-eucalyptus mb-4">{"\n"}</p>
           <h2 className="font-serif text-4xl md:text-5xl font-light">Programma</h2>
           <div className="w-16 h-px bg-gold mx-auto mt-6" />
-          <p className="text-sm text-muted-foreground mt-4 font-serif italic">
-            Speciaal voor onze {subtitle.toLowerCase()}
-          </p>
+          {guestType === 'day' && (
+            <p className="text-sm text-muted-foreground mt-4 font-serif italic">
+              Speciaal voor onze daggasten
+            </p>
+          )}
         </div>
 
         <div className="relative">

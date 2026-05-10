@@ -1,5 +1,5 @@
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
-import { Armchair } from 'lucide-react';
+import { UtensilsCrossed } from 'lucide-react';
 
 export default function SeatingPlan() {
   const ref = useScrollAnimation();
@@ -16,7 +16,7 @@ export default function SeatingPlan() {
         <div className="scroll-animate">
           <div className="rounded-3xl bg-ivory/70 backdrop-blur border border-sage-light/40 shadow-sm p-12 md:p-16 text-center">
             <div className="w-16 h-16 rounded-full bg-sage-light/20 border border-sage-light/50 flex items-center justify-center mx-auto mb-6">
-              <Armchair size={22} className="text-eucalyptus" />
+              <UtensilsCrossed size={22} className="text-eucalyptus" />
             </div>
             <h3 className="font-serif text-2xl md:text-3xl font-light mb-4">
               Binnenkort beschikbaar
