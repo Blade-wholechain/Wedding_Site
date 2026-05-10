@@ -3,11 +3,12 @@ import { Menu, X, LogOut } from 'lucide-react';
 import { useGuest } from '@/context/GuestContext';
 
 const navItems = [
-  { label: 'Details', href: '#details' },
   { label: 'Programma', href: '#schedule' },
+  { label: 'Dresscode', href: '#dresscode' },
   { label: 'Tafelschikking', href: '#seating' },
+  { label: 'Adres', href: '#address' },
   { label: 'RSVP', href: '#rsvp' },
-  { label: 'Reizen', href: '#travel' },
+  { label: 'Overnachten', href: '#travel' },
   { label: 'Galerij', href: '#gallery' },
   { label: 'FAQ', href: '#faq' },
 ];
