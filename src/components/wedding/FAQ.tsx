@@ -1,20 +1,25 @@
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 import { useState } from 'react';
 import { ChevronDown } from 'lucide-react';
+import { useGuest } from '@/context/GuestContext';
 
-const faqs = [
-  { q: 'Wat is de dresscode?', a: 'Chique en elegant. Denk aan champagne-, witte of zachte aardetinten. Vermijd felle kleuren — we passen graag bij het thema.' },
+type Faq = { q: string; a: string; food?: boolean };
+
+const faqs: Faq[] = [
+  { q: 'Wat is de dresscode?', a: 'Chique en elegant. Dames lang, heren in pak met das. Denk aan champagne-, witte of zachte aardetinten.' },
   { q: 'Hoe laat moet ik er zijn?', a: 'Daggasten zijn welkom vanaf 13:30 uur. Avondgasten verwachten we vanaf 19:30 uur. Kom op tijd zodat je niets mist!' },
   { q: 'Mag ik mijn kinderen meenemen?', a: 'We houden ervan om al jullie kleintjes te zien, maar dit wordt een bruiloft voor volwassenen. We hopen op jullie begrip.' },
-  { q: 'Zijn er vegetarische of veganistische opties?', a: 'Zeker! Vermeld je dieetwensen bij de RSVP en we zorgen dat alles geregeld is.' },
+  { q: 'Zijn er vegetarische of veganistische opties?', a: 'Zeker! Vermeld je dieetwensen bij de RSVP en we zorgen dat alles geregeld is.', food: true },
   { q: 'Geven jullie een cadeaulijst?', a: 'Jullie aanwezigheid is het grootste geschenk. Een bijdrage aan onze huwelijksreis wordt erg gewaardeerd — meer info volgt op de dag zelf.' },
-  { q: 'Waar kan ik overnachten?', a: 'Bekijk de sectie Reizen & Verblijven hierboven voor onze hotelaanbevelingen in de buurt.' },
-  { q: 'Is er parkeergelegenheid?', a: 'Ja, er is voldoende parkeerruimte vlakbij de locatie. Carpoolen wordt aangemoedigd.' },
+  { q: 'Waar kan ik overnachten?', a: 'Bekijk de sectie Overnachten hierboven voor onze hotelaanbeveling in de buurt.' },
+  { q: 'Is er parkeergelegenheid?', a: 'Ja, zie de sectie Adres & Parkeren voor betaalde en gratis opties dichtbij.' },
 ];
 
 export default function FAQ() {
   const ref = useScrollAnimation();
+  const { guestType } = useGuest();
   const [open, setOpen] = useState<number | null>(null);
+  const visibleFaqs = guestType === 'evening' ? faqs.filter((f) => !f.food) : faqs;
 
   return (
     <section id="faq" className="py-24 md:py-32" ref={ref}>
