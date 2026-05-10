@@ -1,57 +1,45 @@
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
-import { Hotel, Train, Car, MapPin } from 'lucide-react';
-
-const hotels = [
-  { name: 'Boutique Hotel', desc: 'Een charmant boetiekhotel op loopafstand van de locatie.', stars: '★★★★' },
-  { name: 'Landhuis Suite', desc: 'Romantische suites in landelijke sfeer, perfect om bij te komen.', stars: '★★★★' },
-  { name: 'Bed & Breakfast', desc: 'Sfeervolle B&B voor een intieme overnachting.', stars: '★★★' },
-];
-
-const tips = [
-  { icon: Car, title: 'Met de auto', desc: 'Voldoende parkeergelegenheid in de buurt van de locatie.' },
-  { icon: Train, title: 'Met het OV', desc: 'Vanaf het dichtstbijzijnde station is het een korte rit met de taxi.' },
-  { icon: MapPin, title: 'Carpoolen', desc: 'Laat het ons weten via de RSVP — we helpen graag met matchen.' },
-];
+import { Hotel, ExternalLink, Star } from 'lucide-react';
 
 export default function Travel() {
   const ref = useScrollAnimation();
 
   return (
     <section id="travel" className="py-24 md:py-32" ref={ref}>
-      <div className="max-w-5xl mx-auto px-4">
+      <div className="max-w-3xl mx-auto px-4">
         <div className="text-center mb-16 scroll-animate">
-          <p className="text-sm tracking-[0.3em] uppercase text-eucalyptus mb-4">{"\n"}</p>
+          <p className="text-sm tracking-[0.3em] uppercase text-eucalyptus mb-4">Verblijven</p>
           <h2 className="font-serif text-4xl md:text-5xl font-light">Overnachten</h2>
           <div className="w-16 h-px bg-gold mx-auto mt-6" />
         </div>
 
-        {/* Hotels */}
-        <div className="grid md:grid-cols-3 gap-6 mb-16">
-          {hotels.map((h, i) => (
-            <div key={i} className="scroll-animate rounded-2xl bg-ivory/70 backdrop-blur border border-sage-light/40 p-6 shadow-sm hover:shadow-md transition-shadow duration-500" style={{ transitionDelay: `${i * 100}ms` }}>
-              <Hotel size={20} className="text-eucalyptus mb-3" />
-              <h3 className="font-serif text-lg mb-1">{h.name}</h3>
-              <p className="text-xs text-gold tracking-wider mb-2">{h.stars}</p>
-              <p className="text-sm text-muted-foreground leading-relaxed">{h.desc}</p>
+        <a
+          href="https://maps.app.goo.gl/6Zk2umZRgMNBmDcA6"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="scroll-animate group block rounded-3xl bg-ivory/70 backdrop-blur border border-sage-light/40 p-10 md:p-12 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-500"
+        >
+          <div className="flex flex-col items-center text-center">
+            <div className="w-16 h-16 rounded-full bg-sage-light/20 border border-sage-light/50 flex items-center justify-center mb-6">
+              <Hotel size={22} className="text-eucalyptus" />
             </div>
-          ))}
-        </div>
-
-        {/* Transport tips */}
-        <div className="grid md:grid-cols-3 gap-6">
-          {tips.map((t, i) => {
-            const Icon = t.icon;
-            return (
-              <div key={i} className="scroll-animate text-center" style={{ transitionDelay: `${i * 100}ms` }}>
-                <div className="w-12 h-12 rounded-full bg-sage-light/20 border border-sage-light/50 flex items-center justify-center mx-auto mb-4">
-                  <Icon size={18} className="text-eucalyptus" />
-                </div>
-                <h3 className="font-serif text-lg mb-2">{t.title}</h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">{t.desc}</p>
-              </div>
-            );
-          })}
-        </div>
+            <p className="text-xs tracking-[0.3em] uppercase text-eucalyptus mb-3">Onze aanbeveling</p>
+            <h3 className="font-serif text-2xl md:text-3xl font-light mb-3">
+              Radisson Hotel & Suites Amsterdam Zuid
+            </h3>
+            <div className="flex items-center gap-1 text-gold mb-4">
+              {[...Array(4)].map((_, i) => (
+                <Star key={i} size={14} fill="currentColor" />
+              ))}
+            </div>
+            <p className="text-sm text-muted-foreground leading-relaxed max-w-md">
+              Comfortabel verblijf op korte afstand van de locatie — perfect voor een ontspannen overnachting.
+            </p>
+            <div className="flex items-center gap-2 text-xs text-gold mt-6 tracking-widest uppercase group-hover:gap-3 transition-all">
+              Open in Google Maps <ExternalLink size={12} />
+            </div>
+          </div>
+        </a>
       </div>
     </section>
   );
