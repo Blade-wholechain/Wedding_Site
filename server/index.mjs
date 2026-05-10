@@ -22,6 +22,9 @@ const NOTIFY_TO = process.env.RSVP_NOTIFY_EMAIL ?? GMAIL_USER;
 const APP_PASSWORD = process.env.GMAIL_APP_PASSWORD;
 const RSVP_SECRET = process.env.RSVP_SECRET;
 
+/** Prefer Resend on Render — many hosts block outbound SMTP (587); HTTPS always works. */
+const USE_RESEND = Boolean(process.env.RESEND_API_KEY?.trim());
+
 function buildRsvpEmailBody(payload) {
   const { name, attending, guestType, dietary } = payload;
   const attendingLabel =
@@ -81,6 +84,32 @@ function getTransporter() {
   return transporter;
 }
 
+async function sendWithResend(subject, text) {
+  const key = process.env.RESEND_API_KEY.trim();
+  const from =
+    process.env.RESEND_FROM?.trim() ?? `"RSVP bruiloft" <onboarding@resend.dev>`;
+
+  const res = await fetch('https://api.resend.com/emails', {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${key}`,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      from,
+      to: [NOTIFY_TO],
+      subject,
+      text,
+    }),
+  });
+
+  const body = await res.text();
+  if (!res.ok) {
+    console.error('[resend]', res.status, body);
+    throw new Error(body || `Resend HTTP ${res.status}`);
+  }
+}
+
 const app = express();
 app.use(cors({ origin: true }));
 app.use(express.json({ limit: '32kb' }));
@@ -101,7 +130,15 @@ app.get('/', (_req, res) => {
 });
 
 app.get('/api/health', (_req, res) => {
-  res.json({ ok: true, gmailConfigured: Boolean(APP_PASSWORD) });
+  const hasResend = Boolean(process.env.RESEND_API_KEY?.trim());
+  const hasSmtp = Boolean(APP_PASSWORD);
+  res.json({
+    ok: true,
+    mailReady: hasResend || hasSmtp,
+    provider: hasResend ? 'resend' : hasSmtp ? 'smtp' : 'none',
+    resendConfigured: hasResend,
+    gmailConfigured: hasSmtp,
+  });
 });
 
 app.post('/api/rsvp', async (req, res) => {
@@ -113,10 +150,10 @@ app.post('/api/rsvp', async (req, res) => {
     return;
   }
 
-  const transport = getTransporter();
-  if (!transport) {
-    console.warn('[rsvp] 503 — no GMAIL_APP_PASSWORD');
-    res.status(503).type('text').send('RSVP email not configured (set GMAIL_APP_PASSWORD)');
+  const canSend = USE_RESEND || getTransporter();
+  if (!canSend) {
+    console.warn('[rsvp] 503 — set RESEND_API_KEY (Render) or GMAIL_APP_PASSWORD (local SMTP)');
+    res.status(503).type('text').send('RSVP email not configured');
     return;
   }
 
@@ -130,30 +167,41 @@ app.post('/api/rsvp', async (req, res) => {
   }
 
   const text = buildRsvpEmailBody(body);
+  const subject = `RSVP bruiloft — ${name}`;
 
   try {
-    await transport.sendMail({
-      from: `"RSVP bruiloft" <${GMAIL_USER}>`,
-      to: NOTIFY_TO,
-      subject: `RSVP bruiloft — ${name}`,
-      text,
-    });
-    console.log('[rsvp] mail sent ok');
+    if (USE_RESEND) {
+      await sendWithResend(subject, text);
+      console.log('[rsvp] mail sent ok (Resend)');
+    } else {
+      await getTransporter().sendMail({
+        from: `"RSVP bruiloft" <${GMAIL_USER}>`,
+        to: NOTIFY_TO,
+        subject,
+        text,
+      });
+      console.log('[rsvp] mail sent ok (SMTP)');
+    }
     res.json({ ok: true });
   } catch (e) {
-    console.error('[rsvp] sendMail failed:', e);
+    console.error('[rsvp] send failed:', e);
     res.status(500).type('text').send('Failed to send email');
   }
 });
 
 async function main() {
-  transporter = await createMailTransport();
+  if (USE_RESEND) {
+    console.log('[mail] Using Resend API (HTTPS) — avoids blocked SMTP on many hosts');
+    transporter = null;
+  } else {
+    transporter = await createMailTransport();
+  }
 
   app.listen(PORT, '0.0.0.0', () => {
     console.log(`RSVP API listening on 0.0.0.0:${PORT}`);
     console.log(RSVP_SECRET ? 'RSVP_SECRET is set — POST /api/rsvp requires X-RSVP-Secret' : 'RSVP_SECRET not set — no secret header required');
-    if (!APP_PASSWORD) {
-      console.warn('GMAIL_APP_PASSWORD is not set — POST /api/rsvp will return 503 until you add it to .env');
+    if (!USE_RESEND && !APP_PASSWORD) {
+      console.warn('GMAIL_APP_PASSWORD not set — use RESEND_API_KEY on Render or Gmail locally');
     }
   });
 }
