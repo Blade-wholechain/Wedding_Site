@@ -61,21 +61,18 @@ export default function Hero() {
 
       {/* Content */}
       <div className="relative z-10 text-center px-4">
-        <p className="text-sm tracking-[0.4em] uppercase text-eucalyptus mb-6 animate-gentle-wave">
-          Gaan Eindelijk Trouwen
-        </p>
-        <h1 className="font-serif text-6xl sm:text-8xl md:text-9xl font-light tracking-wide mb-4">
+        <h1 className="font-serif text-6xl sm:text-8xl md:text-9xl font-light tracking-wide mb-6">
           Dulcia <span className="text-gold italic font-normal">&</span> Wybo
         </h1>
+        <p className="text-sm tracking-[0.4em] uppercase text-eucalyptus mb-3 animate-gentle-wave">
+          Gaan Eindelijk Trouwen
+        </p>
+        <p className="font-serif text-xl sm:text-2xl text-muted-foreground italic">
+          Nodigen je van harte uit op
+        </p>
         <div className="w-24 h-px bg-gold mx-auto my-8 animate-shimmer" />
-        <p className="font-serif text-xl sm:text-2xl text-muted-foreground italic mb-2">
-          Nodigen je van harte uit
-        </p>
-        <p className="text-lg tracking-widest text-gold mt-4">
+        <p className="text-lg tracking-widest text-gold">
           5 september 2026
-        </p>
-        <p className="text-sm text-muted-foreground mt-2 tracking-wider">
-          Nederland
         </p>
         <Countdown />
 
