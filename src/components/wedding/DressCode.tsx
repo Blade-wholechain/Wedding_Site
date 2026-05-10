@@ -12,7 +12,7 @@ export default function DressCode() {
           <div className="w-16 h-px bg-gold mx-auto mt-6" />
         </div>
 
-        <div className="grid md:grid-cols-2 gap-8 mb-20">
+        <div className="grid md:grid-cols-2 gap-8">
           {/* Dames */}
           <div className="scroll-animate-left rounded-3xl bg-ivory/70 backdrop-blur border border-sage-light/40 shadow-sm p-10 text-center">
             <div className="flex justify-center mb-6">
@@ -48,19 +48,6 @@ export default function DressCode() {
             <p className="text-xs tracking-[0.3em] uppercase text-gold mb-3">Heren</p>
             <h3 className="font-serif text-2xl font-light">Pak & Das</h3>
           </div>
-        </div>
-
-        {/* Ceremoniemeesters */}
-        <div className="scroll-animate text-center max-w-xl mx-auto rounded-3xl bg-champagne/60 border border-gold/30 p-10">
-          <p className="text-xs tracking-[0.3em] uppercase text-eucalyptus mb-4">Ceremoniemeesters</p>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-8">
-            <p className="font-serif text-xl font-light">Chiara Spee</p>
-            <span className="text-gold hidden sm:inline">&</span>
-            <p className="font-serif text-xl font-light">Willemijn Ruedisulj</p>
-          </div>
-          <p className="text-sm text-muted-foreground italic mt-4 font-serif">
-            Voor al je vragen op de dag zelf
-          </p>
         </div>
       </div>
     </section>

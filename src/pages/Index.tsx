@@ -4,6 +4,7 @@ import Navigation from '@/components/wedding/Navigation';
 import Hero from '@/components/wedding/Hero';
 import Schedule from '@/components/wedding/Schedule';
 import DressCode from '@/components/wedding/DressCode';
+import Ceremoniemeesters from '@/components/wedding/Ceremoniemeesters';
 import SeatingPlan from '@/components/wedding/SeatingPlan';
 import AddressParking from '@/components/wedding/AddressParking';
 import RSVP from '@/components/wedding/RSVP';
@@ -25,6 +26,7 @@ export default function Index() {
       <Hero />
       <Schedule />
       <DressCode />
+      <Ceremoniemeesters />
       <SeatingPlan />
       <AddressParking />
       <RSVP />
