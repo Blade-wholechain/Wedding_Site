@@ -59,6 +59,12 @@ export default function Hero() {
         {/* Soft ivory wash so text remains legible while the painting still reads */}
         <div className="absolute inset-0 bg-gradient-to-b from-ivory/70 via-ivory/40 to-ivory/90" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_hsl(var(--ivory)/0.55)_0%,_transparent_60%)]" />
+        <Sparkles count={18} />
+      </div>
+
+      {/* Subtle disco ball — top right, very small & quiet */}
+      <div className="absolute top-24 right-10 w-12 opacity-30 text-eucalyptus animate-slow-spin hidden md:block">
+        <DiscoBall />
       </div>
 
       {/* Content */}
