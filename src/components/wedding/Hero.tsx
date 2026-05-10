@@ -97,7 +97,7 @@ export default function Hero() {
         <svg viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full">
           <path
             d="M0,60 C360,120 720,0 1080,60 C1260,90 1380,80 1440,60 L1440,120 L0,120 Z"
-            fill="hsl(40, 35%, 97%)"
+            fill="hsl(var(--background))"
           />
         </svg>
       </div>
