@@ -1,9 +1,13 @@
 import path from 'path';
 import { fileURLToPath } from 'url';
+import dns from 'node:dns';
 import dotenv from 'dotenv';
 import cors from 'cors';
 import express from 'express';
 import nodemailer from 'nodemailer';
+
+// Render: Gmail SMTP can fail with ENETUNREACH on IPv6; prefer A records.
+dns.setDefaultResultOrder('ipv4first');
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 dotenv.config({ path: path.resolve(__dirname, '..', '.env') });
@@ -32,7 +36,10 @@ function getTransporter() {
   if (!APP_PASSWORD) return null;
   if (!transporter) {
     transporter = nodemailer.createTransport({
-      service: 'gmail',
+      host: 'smtp.gmail.com',
+      port: 587,
+      secure: false,
+      requireTLS: true,
       auth: { user: GMAIL_USER, pass: APP_PASSWORD },
     });
   }
