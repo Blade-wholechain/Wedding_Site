@@ -39,6 +39,7 @@ jobs:
           VITE_RSVP_SECRET: ${{ secrets.VITE_RSVP_SECRET }}
           PhotoUpload: ${{ vars.PhotoUpload }}
         run: |
+          echo "VITE_BASE_PATH=$VITE_BASE_PATH (GitHub Pages asset prefix — must match site URL path)"
           npm ci
           npm run build
 
