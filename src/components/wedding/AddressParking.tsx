@@ -7,7 +7,7 @@ const places = [
     label: 'Trouwlocatie',
     name: 'Brasserie Paardenburg',
     desc: 'Amstelzijde 55, Ouderkerk aan de Amstel',
-    href: 'https://maps.app.goo.gl/ahRq6Gvfsgcnw86NA',
+    href: 'https://www.google.com/maps/search/?api=1&query=Brasserie+Paardenburg+Amstelzijde+55+Ouderkerk+aan+de+Amstel',
     accent: 'bg-sage-light/30 border-eucalyptus/40',
   },
   {
@@ -15,7 +15,7 @@ const places = [
     label: 'Betaald parkeren',
     name: '2 minuten lopen',
     desc: 'Dichtstbijzijnde parkeergelegenheid bij de locatie',
-    href: 'https://maps.app.goo.gl/EswvuXNBLwsp3m1V9',
+    href: 'https://www.google.com/maps/search/?api=1&query=Parkeerplaats+Ouderkerk+aan+de+Amstel+centrum',
     accent: 'bg-champagne/40 border-gold/30',
   },
   {
@@ -23,7 +23,7 @@ const places = [
     label: 'Gratis parkeren',
     name: '10 minuten lopen',
     desc: 'Op iets grotere afstand, maar zonder kosten',
-    href: 'https://maps.app.goo.gl/22FH8smAkXvh5YcT7',
+    href: 'https://www.google.com/maps/search/?api=1&query=Gratis+parkeren+Ouderkerk+aan+de+Amstel',
     accent: 'bg-ivory border-sage-light/50',
   },
 ];
