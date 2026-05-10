@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
 import heroBrasserie from '@/assets/hero-brasserie-bg.jpg';
+import Sparkles from './Sparkles';
+import DiscoBall from './DiscoBall';
 
 function Countdown() {
   const weddingDate = new Date('2026-09-05T14:00:00').getTime();
