@@ -6,8 +6,13 @@ import cors from 'cors';
 import express from 'express';
 import nodemailer from 'nodemailer';
 
-// Render: Gmail SMTP can fail with ENETUNREACH on IPv6; prefer A records.
+// Render: Gmail SMTP over IPv6 often fails (ENETUNREACH). setDefaultResultOrder alone does not
+// affect nodemailer's resolver — we must pass a custom lookup (IPv4-only).
 dns.setDefaultResultOrder('ipv4first');
+
+function lookupIpv4(hostname, _options, callback) {
+  dns.lookup(hostname, { family: 4 }, callback);
+}
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 dotenv.config({ path: path.resolve(__dirname, '..', '.env') });
@@ -41,6 +46,10 @@ function getTransporter() {
       secure: false,
       requireTLS: true,
       auth: { user: GMAIL_USER, pass: APP_PASSWORD },
+      lookup: lookupIpv4,
+      connectionTimeout: 25_000,
+      greetingTimeout: 20_000,
+      socketTimeout: 45_000,
     });
   }
   return transporter;
@@ -49,6 +58,11 @@ function getTransporter() {
 const app = express();
 app.use(cors({ origin: true }));
 app.use(express.json({ limit: '32kb' }));
+
+app.use((req, _res, next) => {
+  console.log(`[req] ${req.method} ${req.url}`);
+  next();
+});
 
 app.get('/', (_req, res) => {
   res.type('html').send(
@@ -65,13 +79,17 @@ app.get('/api/health', (_req, res) => {
 });
 
 app.post('/api/rsvp', async (req, res) => {
+  console.log('[rsvp] handler entered');
+
   if (RSVP_SECRET && req.headers['x-rsvp-secret'] !== RSVP_SECRET) {
+    console.warn('[rsvp] 401 — set header: curl -H "X-RSVP-Secret: …"');
     res.status(401).send('Unauthorized');
     return;
   }
 
   const transport = getTransporter();
   if (!transport) {
+    console.warn('[rsvp] 503 — no GMAIL_APP_PASSWORD');
     res.status(503).type('text').send('RSVP email not configured (set GMAIL_APP_PASSWORD)');
     return;
   }
@@ -80,6 +98,7 @@ app.post('/api/rsvp', async (req, res) => {
   const name = typeof body.name === 'string' ? body.name.trim() : '';
   const attending = body.attending;
   if (!name || (attending !== 'yes' && attending !== 'no')) {
+    console.warn('[rsvp] 400 — bad body', { hasName: Boolean(name), attending });
     res.status(400).json({ error: 'Missing name or attending' });
     return;
   }
@@ -93,15 +112,18 @@ app.post('/api/rsvp', async (req, res) => {
       subject: `RSVP bruiloft — ${name}`,
       text,
     });
+    console.log('[rsvp] mail sent ok');
     res.json({ ok: true });
   } catch (e) {
-    console.error(e);
+    console.error('[rsvp] sendMail failed:', e);
     res.status(500).type('text').send('Failed to send email');
   }
 });
 
-app.listen(PORT, () => {
-  console.log(`RSVP API listening on http://localhost:${PORT}`);
+// Must bind 0.0.0.0 on Render/Docker or the load balancer never reaches the app.
+app.listen(PORT, '0.0.0.0', () => {
+  console.log(`RSVP API listening on 0.0.0.0:${PORT}`);
+  console.log(RSVP_SECRET ? 'RSVP_SECRET is set — POST /api/rsvp requires X-RSVP-Secret' : 'RSVP_SECRET not set — no secret header required');
   if (!APP_PASSWORD) {
     console.warn('GMAIL_APP_PASSWORD is not set — POST /api/rsvp will return 503 until you add it to .env');
   }
