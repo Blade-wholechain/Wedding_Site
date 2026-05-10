@@ -1,6 +1,7 @@
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 import { useGuest } from '@/context/GuestContext';
 import { Heart, Wine, UtensilsCrossed, Music, Sparkles, Sun } from 'lucide-react';
+import ChampagneTower from './ChampagneTower';
 
 const dayEvents = [
   { time: '13:30', title: 'Ontvangst', desc: '\u200BWij verwelkomen onze daggasten uiterlijk op dit tijdstip', icon: Sun },
@@ -28,7 +29,9 @@ export default function Schedule() {
     <section id="schedule" className="py-24 md:py-32 bg-champagne linen-texture" ref={ref}>
       <div className="max-w-3xl mx-auto px-4">
         <div className="text-center mb-16 scroll-animate">
-          <p className="text-sm tracking-[0.3em] uppercase text-eucalyptus mb-4">{"\n"}</p>
+          <div className="flex justify-center mb-6 text-gold">
+            <ChampagneTower className="w-16 h-auto opacity-70" />
+          </div>
           <h2 className="font-serif text-4xl md:text-5xl font-light">Programma</h2>
           <div className="w-16 h-px bg-gold mx-auto mt-6" />
           {guestType === 'day' && (

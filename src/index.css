@@ -6,47 +6,47 @@
 
 @layer base {
   :root {
-    /* Champagne, ivory, sage green palette */
-    --background: 40 35% 97%;
-    --foreground: 140 12% 18%;
+    /* Monument green + warm beige palette */
+    --background: 38 30% 94%;
+    --foreground: 145 28% 14%;
 
-    --card: 40 30% 95%;
-    --card-foreground: 140 12% 18%;
+    --card: 38 28% 92%;
+    --card-foreground: 145 28% 14%;
 
-    --popover: 40 35% 97%;
-    --popover-foreground: 140 12% 18%;
+    --popover: 38 30% 94%;
+    --popover-foreground: 145 28% 14%;
 
-    --primary: 140 18% 32%;
-    --primary-foreground: 40 35% 97%;
+    --primary: 145 22% 22%;
+    --primary-foreground: 38 30% 94%;
 
-    --secondary: 40 25% 92%;
-    --secondary-foreground: 140 14% 22%;
+    --secondary: 38 22% 88%;
+    --secondary-foreground: 145 24% 18%;
 
-    --muted: 40 18% 93%;
-    --muted-foreground: 140 8% 40%;
+    --muted: 38 18% 89%;
+    --muted-foreground: 145 10% 35%;
 
-    --accent: 90 15% 70%;
-    --accent-foreground: 140 14% 18%;
+    --accent: 145 18% 35%;
+    --accent-foreground: 38 30% 94%;
 
     --destructive: 0 70% 50%;
-    --destructive-foreground: 40 35% 97%;
+    --destructive-foreground: 38 30% 94%;
 
-    --border: 90 12% 82%;
-    --input: 40 18% 90%;
-    --ring: 140 18% 45%;
+    --border: 38 16% 80%;
+    --input: 38 18% 86%;
+    --ring: 145 22% 28%;
 
     --radius: 0.75rem;
 
-    /* Brand tokens */
-    --gold: 38 45% 62%;          /* champagne */
-    --gold-light: 38 50% 82%;    /* light champagne */
-    --champagne: 40 38% 93%;
-    --ivory: 42 40% 98%;
-    --warm-beige: 38 28% 90%;
-    --linen: 40 25% 95%;
-    --sage: 110 18% 55%;
-    --sage-light: 110 20% 80%;
-    --eucalyptus: 130 14% 48%;
+    /* Brand tokens — Monument Green & Beige */
+    --gold: 36 32% 56%;          /* warm beige accent (was champagne) */
+    --gold-light: 36 38% 78%;    /* light beige */
+    --champagne: 36 28% 88%;     /* soft beige surface */
+    --ivory: 38 32% 96%;
+    --warm-beige: 36 24% 84%;
+    --linen: 38 22% 91%;
+    --sage: 145 22% 28%;         /* monument green */
+    --sage-light: 145 14% 60%;   /* muted green */
+    --eucalyptus: 145 22% 22%;   /* deep monument green */
 
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 240 5.3% 26.1%;
@@ -182,6 +182,24 @@
 @keyframes fade-in {
   from { opacity: 0; transform: translateY(10px); }
   to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes sparkle {
+  0%, 100% { opacity: 0; transform: scale(0.6) rotate(0deg); }
+  50% { opacity: 1; transform: scale(1) rotate(45deg); }
+}
+
+@keyframes slow-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.animate-sparkle {
+  animation: sparkle 4s ease-in-out infinite;
+}
+
+.animate-slow-spin {
+  animation: slow-spin 20s linear infinite;
 }
 
 .animate-float {

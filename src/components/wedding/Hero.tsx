@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
 import heroBrasserie from '@/assets/hero-brasserie-bg.jpg';
+import Sparkles from './Sparkles';
+import DiscoBall from './DiscoBall';
 
 function Countdown() {
   const weddingDate = new Date('2026-09-05T14:00:00').getTime();
@@ -57,6 +59,12 @@ export default function Hero() {
         {/* Soft ivory wash so text remains legible while the painting still reads */}
         <div className="absolute inset-0 bg-gradient-to-b from-ivory/70 via-ivory/40 to-ivory/90" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_hsl(var(--ivory)/0.55)_0%,_transparent_60%)]" />
+        <Sparkles count={18} />
+      </div>
+
+      {/* Subtle disco ball — top right, very small & quiet */}
+      <div className="absolute top-24 right-10 w-12 opacity-30 text-eucalyptus animate-slow-spin hidden md:block">
+        <DiscoBall />
       </div>
 
       {/* Content */}
@@ -89,7 +97,7 @@ export default function Hero() {
         <svg viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full">
           <path
             d="M0,60 C360,120 720,0 1080,60 C1260,90 1380,80 1440,60 L1440,120 L0,120 Z"
-            fill="hsl(40, 35%, 97%)"
+            fill="hsl(var(--background))"
           />
         </svg>
       </div>
