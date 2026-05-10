@@ -3,9 +3,9 @@
 #
 # Asset base path (Vite `base` / React Router):
 # - Default: /REPO/ — correct for https://USER.github.io/REPO/
-# - Custom domain (e.g. doelsenwyb.nl): Pages serves from site root. Add a repo Actions variable
-#   Settings → Secrets and variables → Actions → Variables → VITE_BASE_PATH = /  (slash only)
-#   then re-run the workflow, or the github.io URL will load assets but the apex domain will not.
+# - Custom domain (e.g. doelsenwyb.nl): Pages serves from site root. Add repo variable PAGESASSETBASE
+#   (name must be letters/digits only — GitHub disallows underscores in variable names).
+#   Settings → Secrets and variables → Actions → Variables → PAGESASSETBASE = /  then re-run workflow.
 name: Deploy GitHub Pages
 
 on:
@@ -34,7 +34,7 @@ jobs:
 
       - name: Install and build
         env:
-          VITE_BASE_PATH: ${{ vars.VITE_BASE_PATH || format('/{0}/', github.event.repository.name) }}
+          VITE_BASE_PATH: ${{ vars.PAGESASSETBASE || format('/{0}/', github.event.repository.name) }}
         run: |
           npm ci
           npm run build

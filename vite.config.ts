@@ -4,7 +4,7 @@ import path from "path";
 import { componentTagger } from "lovable-tagger";
 
 // https://vitejs.dev/config/
-// CI sets VITE_BASE_PATH (see .github/workflows/pages.yml). Custom domains need base `/`.
+// CI sets VITE_BASE_PATH from repo variable PAGESASSETBASE (see .github/workflows/pages.yml).
 export default defineConfig(({ mode }) => ({
   base: process.env.VITE_BASE_PATH ?? "/",
   server: {
