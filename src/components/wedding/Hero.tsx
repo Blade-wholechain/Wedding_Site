@@ -69,8 +69,8 @@ export default function Hero() {
 
       {/* Content */}
       <div className="relative z-10 text-center px-4">
-        <h1 className="font-serif text-6xl sm:text-8xl md:text-9xl font-light tracking-wide mb-6">
-          Dulcia <span className="text-gold italic font-normal">&</span> Wybo
+        <h1 className="font-script text-6xl sm:text-8xl md:text-9xl mb-6">
+          Dulcia <span className="text-gold">&</span> Wybo
         </h1>
         <p className="text-sm tracking-[0.4em] uppercase text-eucalyptus mb-3 animate-gentle-wave">
           Gaan Eindelijk Trouwen

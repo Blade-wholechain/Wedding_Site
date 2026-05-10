@@ -15,6 +15,7 @@ export default {
     extend: {
       fontFamily: {
         serif: ['"Cormorant Garamond"', 'Georgia', 'serif'],
+        script: ['"Adios Script Pro"', '"AdiosScriptPro"', '"Great Vibes"', 'cursive'],
         sans: ['Inter', 'system-ui', 'sans-serif'],
       },
       colors: {
