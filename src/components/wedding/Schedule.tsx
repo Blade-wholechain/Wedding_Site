@@ -1,6 +1,7 @@
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 import { useGuest } from '@/context/GuestContext';
 import { Heart, Wine, UtensilsCrossed, Music, Sparkles, Sun } from 'lucide-react';
+import ChampagneTower from './ChampagneTower';
 
 const dayEvents = [
   { time: '13:30', title: 'Ontvangst', desc: '\u200BWij verwelkomen onze daggasten uiterlijk op dit tijdstip', icon: Sun },
