@@ -24,12 +24,14 @@ function resolveBase(envFile: Record<string, string>): string {
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), "");
   const photoUpload = env.PhotoUpload ?? process.env.PhotoUpload ?? "";
+  const renderUrl = env.RenderURL ?? process.env.RenderURL ?? "";
   const base = resolveBase(env);
 
   return {
     base,
     define: {
       "import.meta.env.PhotoUpload": JSON.stringify(photoUpload),
+      "import.meta.env.RenderURL": JSON.stringify(renderUrl),
     },
     server: {
       host: "::",

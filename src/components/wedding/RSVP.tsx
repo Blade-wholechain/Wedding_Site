@@ -8,27 +8,6 @@ const dietaryOptions = ['Vlees', 'Vis', 'Ik ben zwanger', 'Anders'];
 
 const RSVP_NOTIFY_EMAIL = 'doelsenwyb@gmail.com';
 
-function buildRsvpMessage(params: {
-  name: string;
-  attending: string;
-  guestType: 'day' | 'evening' | null;
-  dietary: string;
-}): string {
-  const attendingLabel =
-    params.attending === 'yes' ? 'Ja, ik kom' : params.attending === 'no' ? 'Helaas niet' : params.attending;
-  const guestLabel =
-    params.guestType === 'day' ? 'Daggast' : params.guestType === 'evening' ? 'Avondgast' : '—';
-  const lines = [
-    `Naam: ${params.name}`,
-    `Komt: ${attendingLabel}`,
-    `Type gast: ${guestLabel}`,
-  ];
-  if (params.attending === 'yes' && params.guestType === 'day') {
-    lines.push(`Dieetvoorkeur: ${params.dietary || '—'}`);
-  }
-  return lines.join('\n');
-}
-
 const initialForm = () => ({
   name: '',
   attending: '',
@@ -39,13 +18,12 @@ export default function RSVP() {
   const [submitted, setSubmitted] = useState(false);
   const ref = useScrollAnimation([submitted]);
   const { guestType } = useGuest();
-  const [isSending, setIsSending] = useState(false);
   const [form, setForm] = useState(initialForm);
 
   const isDayGuest = guestType === 'day';
   const showDietarySection = form.attending === 'yes' && isDayGuest;
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
     const payload = {
@@ -55,58 +33,49 @@ export default function RSVP() {
       dietary: showDietarySection ? form.dietary : '',
     };
 
-    const useGmailApi =
-      Boolean(import.meta.env.VITE_RSVP_API_URL) || import.meta.env.DEV;
+    const canPostRsvp =
+      Boolean(import.meta.env.RenderURL?.trim()) || import.meta.env.DEV;
 
-    if (useGmailApi) {
-      setIsSending(true);
-      try {
-        const base = import.meta.env.VITE_RSVP_API_URL?.replace(/\/$/, '') ?? '';
-        const url = base ? `${base}/api/rsvp` : '/api/rsvp';
-        const headers: Record<string, string> = {
-          'Content-Type': 'application/json',
-        };
-        const secret = import.meta.env.VITE_RSVP_SECRET;
-        if (secret) {
-          headers['X-RSVP-Secret'] = secret;
-        }
-
-        const res = await fetch(url, {
-          method: 'POST',
-          headers,
-          body: JSON.stringify(payload),
-        });
-
-        if (!res.ok) {
-          throw new Error(await res.text());
-        }
-
-        setSubmitted(true);
-      } catch (err) {
-        console.error(err);
-        toast.error('Versturen mislukt. Probeer het later opnieuw of mail ons rechtstreeks.');
-      } finally {
-        setIsSending(false);
-      }
+    if (!canPostRsvp) {
+      toast.error(
+        `Online RSVP staat niet aan op deze site. Stuur je reactie naar ${RSVP_NOTIFY_EMAIL} (kopieer het adres).`,
+        { duration: 8000 }
+      );
       return;
     }
 
-    const message = buildRsvpMessage({
-      name: payload.name,
-      attending: payload.attending,
-      guestType: payload.guestType,
-      dietary: payload.dietary,
-    });
-    const subject = encodeURIComponent(`RSVP bruiloft — ${payload.name}`);
-    const body = encodeURIComponent(message);
-    window.location.href = `mailto:${RSVP_NOTIFY_EMAIL}?subject=${subject}&body=${body}`;
     setSubmitted(true);
+
+    const base = import.meta.env.RenderURL?.replace(/\/$/, '') ?? '';
+    const url = base ? `${base}/api/rsvp` : '/api/rsvp';
+    const headers: Record<string, string> = {
+      'Content-Type': 'application/json',
+    };
+    const secret = import.meta.env.VITE_RSVP_SECRET;
+    if (secret) {
+      headers['X-RSVP-Secret'] = secret;
+    }
+
+    void fetch(url, {
+      method: 'POST',
+      headers,
+      body: JSON.stringify(payload),
+    })
+      .then(async (res) => {
+        if (!res.ok) throw new Error(await res.text());
+      })
+      .catch((err) => {
+        console.error(err);
+        toast.error(
+          `Je reactie kon niet automatisch worden doorgegeven (server traag of offline). Mail ${RSVP_NOTIFY_EMAIL} als je twijfelt.`,
+          { duration: 12000 }
+        );
+      });
   };
 
   const resetAndSubmitAnother = () => {
     setForm(initialForm());
     setSubmitted(false);
-    setIsSending(false);
     requestAnimationFrame(() => {
       document.getElementById('rsvp')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
@@ -210,10 +179,10 @@ export default function RSVP() {
 
           <button
             type="submit"
-            disabled={!form.name || !form.attending || isSending}
+            disabled={!form.name || !form.attending}
             className="w-full py-3.5 rounded-xl bg-eucalyptus text-primary-foreground font-medium text-sm tracking-wider hover:opacity-90 transition-all duration-300 disabled:opacity-40 disabled:cursor-not-allowed"
           >
-            {isSending ? 'Verzenden…' : 'Verstuur RSVP'}
+            Verstuur RSVP
           </button>
         </form>
       </div>
