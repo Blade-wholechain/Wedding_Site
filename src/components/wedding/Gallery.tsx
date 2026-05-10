@@ -1,6 +1,6 @@
 import { useState, useRef } from 'react';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
-import { X, Upload, Image as ImageIcon } from 'lucide-react';
+import { X, Upload } from 'lucide-react';
 
 const photos = [
   { id: 1, span: 'row-span-2', color: 'from-stone-100 to-stone-50' },
