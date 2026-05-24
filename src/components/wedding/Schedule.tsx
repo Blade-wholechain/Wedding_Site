@@ -4,16 +4,16 @@ import { Heart, Wine, UtensilsCrossed, Music, Sparkles, Sun } from 'lucide-react
 import ChampagneTower from './ChampagneTower';
 
 const dayEvents = [
-  { time: '13:30', title: 'Ontvangst', desc: '\u200BWij verwelkomen onze daggasten uiterlijk op dit tijdstip', icon: Sun },
+  { time: '13:30', title: 'Ontvangst', desc: 'Drink er nog één op het bruidspaar!', icon: Sun },
   { time: '14:00', title: 'Ceremonie', desc: 'Het echtpaar geeft elkaar het ja-woord', icon: Heart },
   { time: '15:00', title: 'Champagne toost', desc: 'Op het bruidspaar en de liefde', icon: Wine },
   { time: '16:30', title: 'Diner', desc: '', icon: UtensilsCrossed },
 ];
 
 const eveningEvents = [
-  { time: '19:30', title: 'Inloop', desc: 'TBD', icon: Sparkles },
+  { time: '19:30', title: 'Uitzwaaien bruidspaar', desc: '\u200B', icon: Sparkles },
   { time: '20:00', title: 'Aanvang feest', desc: 'Het feest kan beginnen!', icon: Music },
-  { time: '00:30', title: 'Uitzwaaimoment', desc: 'TBD', icon: Heart },
+  { time: '00:30', title: 'Uitzwaaimoment', desc: '\u200B', icon: Heart },
 ];
 
 const fullEvents = [...dayEvents, ...eveningEvents];

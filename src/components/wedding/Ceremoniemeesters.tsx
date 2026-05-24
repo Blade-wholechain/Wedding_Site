@@ -7,7 +7,7 @@ export default function Ceremoniemeesters() {
     <section id="ceremoniemeesters" className="py-24 md:py-32" ref={ref}>
       <div className="max-w-4xl mx-auto px-4">
         <div className="text-center mb-16 scroll-animate">
-          <p className="text-sm tracking-[0.3em] uppercase text-eucalyptus mb-4">Voor al je vragen op de dag zelf</p>
+          <p className="text-sm tracking-[0.3em] uppercase text-eucalyptus mb-4">{"\u200B"}voor al je vragen</p>
           <h2 className="font-serif text-4xl md:text-5xl font-light">Ceremoniemeesters</h2>
           <div className="w-16 h-px bg-gold mx-auto mt-6" />
         </div>
@@ -19,7 +19,7 @@ export default function Ceremoniemeesters() {
             <p className="font-serif text-xl font-light">Willemijn Ruedisulj</p>
           </div>
           <p className="text-sm text-muted-foreground italic mt-4 font-serif">
-            Voor al je vragen op de dag zelf
+            doelsenwyb@gmail.com
           </p>
         </div>
       </div>

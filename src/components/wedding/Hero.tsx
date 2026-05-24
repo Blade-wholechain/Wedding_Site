@@ -72,11 +72,11 @@ export default function Hero() {
         <h1 className="font-script text-6xl sm:text-8xl md:text-9xl mb-6">
           Dulcia <span className="text-gold">&</span> Wybo
         </h1>
-        <p className="text-sm tracking-[0.4em] uppercase text-eucalyptus mb-3 animate-gentle-wave">
-          Gaan Eindelijk Trouwen
+        <p className="tracking-[0.4em] uppercase text-eucalyptus mb-3 animate-gentle-wave text-lg">
+          GAAN TROUWEN
         </p>
         <p className="font-serif text-xl sm:text-2xl text-muted-foreground italic">
-          Nodigen je van harte uit op
+          {"\n"}
         </p>
         <div className="w-24 h-px bg-gold mx-auto my-8 animate-shimmer" />
         <p className="text-lg tracking-widest text-gold">
