@@ -41,6 +41,9 @@ export default function AccessGate() {
           <h1 className="font-serif text-5xl sm:text-6xl font-light tracking-wide">
             Dulcia <span className="text-gold italic">&</span> Wybo
           </h1>
+          <p className="font-serif italic text-gold text-xl mt-2">
+            Gaan trouwen!
+          </p>
           <div className="w-16 h-px bg-gold mx-auto my-6" />
           <p className="font-serif italic text-muted-foreground text-lg">
             5 september 2026
@@ -54,7 +57,7 @@ export default function AccessGate() {
           </div>
 
           <p className="text-center text-sm text-muted-foreground mb-6 font-serif italic">
-            Voer je persoonlijke code in om verder te gaan
+            Voer ontvangen code in om verder te gaan
           </p>
 
           <form onSubmit={handleSubmit} className="space-y-4">
@@ -62,7 +65,7 @@ export default function AccessGate() {
               type="text"
               value={code}
               onChange={(e) => { setCode(e.target.value); setError(false); }}
-              placeholder="Jouw code"
+              placeholder="Ontvangen code"
               autoFocus
               maxLength={32}
               className={`w-full px-5 py-3.5 rounded-xl bg-ivory/90 border text-center text-base tracking-[0.2em] uppercase font-serif focus:outline-none transition-all duration-300 ${
@@ -83,7 +86,7 @@ export default function AccessGate() {
               disabled={!code.trim()}
               className="w-full py-3.5 rounded-xl bg-eucalyptus text-primary-foreground font-medium text-sm tracking-[0.2em] uppercase hover:opacity-90 transition-all duration-300 disabled:opacity-40 disabled:cursor-not-allowed"
             >
-              Binnenkomen
+              Bevestigen
             </button>
           </form>
 
