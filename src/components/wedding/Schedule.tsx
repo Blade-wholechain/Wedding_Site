@@ -4,7 +4,7 @@ import { Heart, Wine, UtensilsCrossed, Music, Sparkles, Sun } from 'lucide-react
 import ChampagneTower from './ChampagneTower';
 
 const dayEvents = [
-  { time: '13:30', title: 'Ontvangst', desc: 'Drink er nog één op het bruidspaar!', icon: Sun },
+  { time: '13:30', title: 'Ontvangst', desc: 'De gasten worden welkom geheten', icon: Sun },
   { time: '14:00', title: 'Ceremonie', desc: 'Het echtpaar geeft elkaar het ja-woord', icon: Heart },
   { time: '15:00', title: 'Champagne toost', desc: 'Op het bruidspaar en de liefde', icon: Wine },
   { time: '16:30', title: 'Diner', desc: '', icon: UtensilsCrossed },
