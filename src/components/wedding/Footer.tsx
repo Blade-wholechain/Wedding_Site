@@ -8,7 +8,7 @@ export default function Footer() {
           Dulcia <span className="text-gold italic">&</span> Wybo
         </p>
         <p className="text-sm text-muted-foreground mb-6 italic font-serif">
-          "To be continued..."
+          "Op onze liefde"
         </p>
         <div className="flex items-center justify-center gap-2 text-muted-foreground text-xs">
           <span>Gemaakt met</span>
