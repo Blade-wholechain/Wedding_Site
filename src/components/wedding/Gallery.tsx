@@ -31,7 +31,6 @@ export default function Gallery() {
     <section id="gallery" className="py-24 md:py-32 bg-linen linen-texture" ref={ref}>
       <div className="max-w-5xl mx-auto px-4">
         <div className="text-center mb-16 scroll-animate">
-          <p className="text-sm tracking-[0.3em] uppercase text-eucalyptus mb-4">TBD</p>
           <h2 className="font-serif text-4xl md:text-5xl font-light">Galerij</h2>
           <div className="w-16 h-px bg-gold mx-auto mt-6" />
         </div>
@@ -40,9 +39,8 @@ export default function Gallery() {
           {photos.map((p, i) => (
             <div
               key={p.id}
-              className={`scroll-animate rounded-2xl overflow-hidden cursor-pointer group ${p.span}`}
+              className={`scroll-animate rounded-2xl overflow-hidden group ${p.span}`}
               style={{ transitionDelay: `${i * 80}ms` }}
-              onClick={() => setLightbox(i)}
             >
               <div className={`w-full h-full bg-gradient-to-br ${p.color} flex items-center justify-center transition-transform duration-700 group-hover:scale-105`}>
                 <div className="text-center opacity-60 group-hover:opacity-100 transition-opacity duration-500">

@@ -13,6 +13,7 @@ const faqs: Faq[] = [
   { q: 'Geven jullie een cadeaulijst?', a: 'Jullie aanwezigheid is het grootste geschenk. Een bijdrage aan onze huwelijksreis wordt erg gewaardeerd - meer info volgt vanuit de ceremoniemeesters.' },
   { q: 'Waar kan ik overnachten?', a: 'Bekijk de sectie Overnachten hierboven voor onze hotelaanbeveling in de buurt.' },
   { q: 'Is er parkeergelegenheid?', a: 'Ja, zie de sectie Adres & Parkeren voor betaalde en gratis opties dichtbij.' },
+  { q: 'Staat je vraag er niet tussen?', a: 'Neem contact op met onze ceremoniemeesters via doelsenwyb@gmail.com' },
 ];
 
 export default function FAQ() {
