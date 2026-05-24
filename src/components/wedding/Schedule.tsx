@@ -11,7 +11,7 @@ const dayEvents = [
 ];
 
 const eveningEvents = [
-  { time: '19:30', title: 'Uitzwaaien bruidspaar', desc: '\u200B', icon: Sparkles },
+  { time: '19:30', title: 'Uitzwaaien bruidspaar', desc: 'Drink er nog één op het bruidspaar!', icon: Sparkles },
   { time: '20:00', title: 'Aanvang feest', desc: 'Het feest kan beginnen!', icon: Music },
   { time: '00:30', title: 'Uitzwaaimoment', desc: '\u200B', icon: Heart },
 ];
