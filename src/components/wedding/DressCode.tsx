@@ -7,7 +7,7 @@ export default function DressCode() {
     <section id="dresscode" className="py-24 md:py-32" ref={ref}>
       <div className="max-w-4xl mx-auto px-4">
         <div className="text-center mb-16 scroll-animate">
-          <p className="text-sm tracking-[0.3em] uppercase text-eucalyptus mb-4">Voor de gelegenheid</p>
+          <p className="text-sm tracking-[0.3em] uppercase text-eucalyptus mb-4">{"\u200B"}</p>
           <h2 className="font-serif text-4xl md:text-5xl font-light">Dresscode</h2>
           <div className="w-16 h-px bg-gold mx-auto mt-6" />
         </div>

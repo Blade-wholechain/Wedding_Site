@@ -33,7 +33,7 @@ export default function Travel() {
               ))}
             </div>
             <p className="text-sm text-muted-foreground leading-relaxed max-w-md">
-              Comfortabel verblijf op korte afstand van de locatie — perfect voor een ontspannen overnachting.
+              Het bruidspaar overnacht in dit hotel. Bij verdere interesse, neem contact op met de ceremoniemeesters.{"\n\n"}Comfortabel verblijf op korte afstand van de locatie — perfect voor een ontspannen overnachting.
             </p>
             <div className="flex items-center gap-2 text-xs text-gold mt-6 tracking-widest uppercase group-hover:gap-3 transition-all">
               Open in Google Maps <ExternalLink size={12} />
