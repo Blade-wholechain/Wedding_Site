@@ -1,6 +1,6 @@
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 import { useGuest } from '@/context/GuestContext';
-import { Heart, Wine, UtensilsCrossed, Music, Sparkles, Sun } from 'lucide-react';
+import { Heart, Wine, UtensilsCrossed, Music, Sparkles, Sun, Moon } from 'lucide-react';
 import ChampagneTower from './ChampagneTower';
 
 const dayEvents = [
@@ -14,6 +14,7 @@ const eveningEvents = [
   { time: '19:30', title: 'Uitzwaaien bruidspaar', desc: 'Drink er nog één op het bruidspaar!', icon: Sparkles },
   { time: '20:00', title: 'Aanvang feest', desc: 'Het feest kan beginnen!', icon: Music },
   { time: '00:30', title: 'Uitzwaaimoment', desc: '\u200B', icon: Heart },
+  { time: '01:00', title: 'Einde', desc: '\u200B', icon: Moon },
 ];
 
 const fullEvents = [...dayEvents, ...eveningEvents];
