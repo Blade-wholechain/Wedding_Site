@@ -12,8 +12,8 @@ const STORAGE_KEY = 'wedding-guest-type';
 
 // Access codes
 const CODES: Record<string, GuestType> = {
-  'DAG2026': 'day',
-  'AVOND2026': 'evening',
+  'DENWDAG2026': 'day',
+  'DENW2026': 'evening',
 };
 
 const GuestContext = createContext<GuestContextValue | undefined>(undefined);
