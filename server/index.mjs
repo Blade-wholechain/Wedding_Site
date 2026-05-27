@@ -25,17 +25,51 @@ const RSVP_SECRET = process.env.RSVP_SECRET;
 /** Prefer Resend on Render — many hosts block outbound SMTP (587); HTTPS always works. */
 const USE_RESEND = Boolean(process.env.RESEND_API_KEY?.trim());
 
+function normalizeRsvpGuests(payload) {
+  const guests = Array.isArray(payload.guests)
+    ? payload.guests
+    : [
+        {
+          name: payload.name,
+          attending: payload.attending,
+          dietary: payload.dietary,
+        },
+      ];
+
+  return guests.map((guest) => {
+    const entry = guest && typeof guest === 'object' ? guest : {};
+    return {
+      name: typeof entry.name === 'string' ? entry.name.trim() : '',
+      attending: entry.attending,
+      dietary: typeof entry.dietary === 'string' ? entry.dietary.trim() : '',
+    };
+  });
+}
+
 function buildRsvpEmailBody(payload) {
-  const { name, attending, guestType, dietary } = payload;
-  const attendingLabel =
-    attending === 'yes' ? 'Ja, ik kom' : attending === 'no' ? 'Helaas niet' : String(attending ?? '');
   const guestLabel =
-    guestType === 'day' ? 'Daggast' : guestType === 'evening' ? 'Avondgast' : '—';
-  const lines = [`Naam: ${name}`, `Komt: ${attendingLabel}`, `Type gast: ${guestLabel}`];
-  if (attending === 'yes' && guestType === 'day') {
-    lines.push(`Dieetvoorkeur: ${dietary || '—'}`);
-  }
-  return lines.join('\n');
+    payload.guestType === 'day' ? 'Daggast' : payload.guestType === 'evening' ? 'Avondgast' : '—';
+
+  return normalizeRsvpGuests(payload)
+    .map((guest, index) => {
+      const attendingLabel =
+        guest.attending === 'yes'
+          ? 'Ja, ik kom'
+          : guest.attending === 'no'
+            ? 'Helaas niet'
+            : String(guest.attending ?? '');
+      const lines = [
+        `Persoon ${index + 1}`,
+        `Naam: ${guest.name}`,
+        `Komt: ${attendingLabel}`,
+        `Type gast: ${guestLabel}`,
+      ];
+      if (guest.attending === 'yes' && payload.guestType === 'day') {
+        lines.push(`Dieetvoorkeur: ${guest.dietary || '—'}`);
+      }
+      return lines.join('\n');
+    })
+    .join('\n\n');
 }
 
 let transporter;
@@ -158,16 +192,26 @@ app.post('/api/rsvp', async (req, res) => {
   }
 
   const body = req.body ?? {};
-  const name = typeof body.name === 'string' ? body.name.trim() : '';
-  const attending = body.attending;
-  if (!name || (attending !== 'yes' && attending !== 'no')) {
-    console.warn('[rsvp] 400 — bad body', { hasName: Boolean(name), attending });
-    res.status(400).json({ error: 'Missing name or attending' });
+  const guests = normalizeRsvpGuests(body);
+  const hasValidGuests =
+    guests.length > 0 &&
+    guests.length <= 2 &&
+    guests.every((guest) => guest.name && (guest.attending === 'yes' || guest.attending === 'no'));
+
+  if (!hasValidGuests) {
+    console.warn('[rsvp] 400 — bad body', {
+      guestCount: guests.length,
+      guests: guests.map((guest) => ({
+        hasName: Boolean(guest.name),
+        attending: guest.attending,
+      })),
+    });
+    res.status(400).json({ error: 'Missing RSVP guest details' });
     return;
   }
 
   const text = buildRsvpEmailBody(body);
-  const subject = `RSVP bruiloft — ${name}`;
+  const subject = `RSVP bruiloft — ${guests.map((guest) => guest.name).join(' + ')}`;
 
   try {
     if (USE_RESEND) {
