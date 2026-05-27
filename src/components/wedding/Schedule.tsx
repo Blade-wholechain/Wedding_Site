@@ -4,7 +4,7 @@ import { Heart, Wine, UtensilsCrossed, Music, Sparkles, Sun, Moon } from 'lucide
 import ChampagneTower from './ChampagneTower';
 
 const dayEvents = [
-  { time: '13:30', title: 'Ontvangst', desc: 'De gasten worden welkom geheten', icon: Sun },
+  { time: '13:30', title: 'Ontvangst', desc: 'De daggasten worden uiterlijk op dit tijdstip verwacht', icon: Sun },
   { time: '14:00', title: 'Ceremonie', desc: 'Het echtpaar geeft elkaar het ja-woord', icon: Heart },
   { time: '15:00', title: 'Champagne toost', desc: 'Op het bruidspaar en de liefde', icon: Wine },
   { time: '16:30', title: 'Diner', desc: "Met z'n allen aan tafel", icon: UtensilsCrossed },
@@ -12,7 +12,7 @@ const dayEvents = [
 
 const eveningEvents = [
   { time: '19:30', title: 'Inloop feest', desc: 'De gasten worden welkom geheten', icon: Sparkles },
-  { time: '20:00', title: 'Aanvang feest', desc: 'Het feest kan beginnen!', icon: Music },
+  { time: '20:00', title: 'Aanvang feest', desc: 'Het bruidspaar opent het feest!', icon: Music },
   { time: '00:30', title: 'Uitzwaaien bruidspaar', desc: 'Drink er nog één op het bruidspaar!', icon: Heart },
   { time: '01:00', title: 'Einde', desc: '\u200B', icon: Moon },
 ];

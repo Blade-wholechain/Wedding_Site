@@ -7,7 +7,7 @@ type Faq = { q: string; a: string; food?: boolean };
 
 const faqs: Faq[] = [
   { q: 'Wat is de dresscode?', a: 'Chique en elegant. Dames lang, heren in pak met das. ' },
-  { q: 'Hoe laat moet ik er zijn?', a: 'Daggasten worden verwacht om 13:30 uur. De avondgasten worden vanaf 19:30 uur verwacht, en uiterlijk 19:45 graag aanwezig. Kom graag op tijd zodat je niets mist!”' },
+  { q: 'Hoe laat moet ik er zijn?', a: 'Daggasten worden verwacht om 13:30 uur. De avondgasten worden vanaf 19:30 uur verwacht, en uiterlijk 19:45 graag aanwezig. Kom graag op tijd zodat je niets mist!' },
   { q: 'Mag ik mijn kinderen meenemen?', a: 'We houden ervan om al jullie kleintjes te zien, maar dit wordt een bruiloft voor volwassenen. We hopen op jullie begrip.' },
   { q: 'Zijn er vegetarische of veganistische opties?', a: 'Zeker! Vermeld je dieetwensen bij de RSVP en we zorgen dat alles geregeld is.', food: true },
   { q: 'Geven jullie een cadeaulijst?', a: 'Jullie aanwezigheid is het grootste geschenk. Een bijdrage aan onze huwelijksreis wordt erg gewaardeerd - meer info volgt vanuit de ceremoniemeesters.' },

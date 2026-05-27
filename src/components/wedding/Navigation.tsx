@@ -5,7 +5,7 @@ import { useGuest } from '@/context/GuestContext';
 const navItems = [
   { label: 'Programma', href: '#schedule' },
   { label: 'Dresscode', href: '#dresscode' },
-  { label: 'Tafelschikking', href: '#seating' },
+  { label: 'Tafelschikking', href: '#seating', dayOnly: true },
   { label: 'Adres', href: '#address' },
   { label: 'RSVP', href: '#rsvp' },
   { label: 'Overnachten', href: '#travel' },
@@ -16,7 +16,8 @@ const navItems = [
 export default function Navigation() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
-  const { signOut } = useGuest();
+  const { guestType, signOut } = useGuest();
+  const visibleNavItems = navItems.filter((item) => !item.dayOnly || guestType === 'day');
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 50);
@@ -36,7 +37,7 @@ export default function Navigation() {
 
           {/* Desktop */}
           <div className="hidden md:flex items-center gap-7">
-            {navItems.map((item) => (
+            {visibleNavItems.map((item) => (
               <a
                 key={item.href}
                 href={item.href}
@@ -69,7 +70,7 @@ export default function Navigation() {
       {open && (
         <div className="md:hidden glass border-t border-sage-light/20">
           <div className="px-4 py-4 space-y-3">
-            {navItems.map((item) => (
+            {visibleNavItems.map((item) => (
               <a
                 key={item.href}
                 href={item.href}

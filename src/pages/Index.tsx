@@ -27,7 +27,7 @@ export default function Index() {
       <Schedule />
       <DressCode />
       <Ceremoniemeesters />
-      <SeatingPlan />
+      {guestType === 'day' && <SeatingPlan />}
       <AddressParking />
       <RSVP />
       <Travel />
