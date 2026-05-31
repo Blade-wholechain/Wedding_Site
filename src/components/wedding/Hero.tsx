@@ -31,7 +31,7 @@ function Countdown() {
   ];
 
   return (
-    <div className="flex justify-center gap-4 sm:gap-6 mt-8">
+    <div className="flex justify-center gap-4 sm:gap-6 mt-5">
       {units.map((u) => (
         <div key={u.label} className="text-center">
           <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-xl bg-ivory/85 backdrop-blur border border-sage-light/40 flex items-center justify-center shadow-sm animate-countdown-pulse">
@@ -69,17 +69,17 @@ export default function Hero() {
 
       {/* Content */}
       <div className="relative z-10 text-center px-4">
-        <h1 className="font-script text-6xl sm:text-8xl md:text-9xl mb-6">
+        <h1 className="font-script text-6xl sm:text-8xl md:text-9xl mb-6 -translate-y-4">
           Dulcia <span className="text-gold">&</span> Wybo
         </h1>
-        <p className="tracking-[0.4em] uppercase text-eucalyptus mb-3 animate-gentle-wave text-lg">
+        <p className="tracking-[0.4em] uppercase text-eucalyptus mt-18 mb-3 animate-gentle-wave text-lg">
           GAAN TROUWEN
         </p>
-        <p className="font-serif text-xl sm:text-2xl text-muted-foreground italic">
+        <p className="font-serif text-xl sm:text-2xl text-muted-foreground italic leading-none">
           {"\n"}
         </p>
-        <div className="w-24 h-px bg-gold mx-auto my-8 animate-shimmer" />
-        <p className="text-lg tracking-widest text-gold">
+        <div className="w-24 h-px bg-gold mx-auto mt-3 mb-4 animate-shimmer" />
+        <p className="text-[1.4rem] tracking-widest text-gold">
           5 september 2026
         </p>
         <Countdown />

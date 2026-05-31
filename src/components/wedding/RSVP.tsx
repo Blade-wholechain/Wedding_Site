@@ -112,8 +112,8 @@ export default function RSVP() {
           <h2 className="font-serif text-3xl mb-3">Dankjewel!</h2>
           <p className="text-muted-foreground">
             {hasSomeoneAttending
-              ? 'We kunnen niet wachten om met je te vieren!'
-              : 'We zullen je missen, bedankt voor het laten weten.'}
+              ? 'Wij kunnen niet wachten om onze bijzondere dag samen te vieren!'
+              : 'Helaas, bedankt voor het laten weten.'}
           </p>
           <button
             type="button"
